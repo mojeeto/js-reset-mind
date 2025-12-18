@@ -31,12 +31,18 @@ let currentResult = defaultResult;
 
 //let calculationDescription = `(${defaultResult} + 10) * 3 / 2 - 1`;
 
+function getUserInput() {
+  return parseInt(userInput.value);
+}
+
 function add() {
+  const enteredNumber = getUserInput();
+  const calucationDescription = `${currentResult} + ${enteredNumber}`;
   // using parseInt
   //currentResult = currentResult + Number.parseInt(userInput.value);
   // easy way
   currentResult = currentResult + +userInput.value;
-  outputResult(currentResult, "");
+  outputResult(currentResult, calucationDescription);
 }
 
 addBtn.addEventListener("click", add);
