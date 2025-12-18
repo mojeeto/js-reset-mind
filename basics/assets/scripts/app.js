@@ -32,7 +32,10 @@ let currentResult = defaultResult;
 //let calculationDescription = `(${defaultResult} + 10) * 3 / 2 - 1`;
 
 function add() {
-  currentResult = currentResult + userInput.value;
+  // using parseInt
+  //currentResult = currentResult + Number.parseInt(userInput.value);
+  // easy way
+  currentResult = currentResult + +userInput.value;
   outputResult(currentResult, "");
 }
 
