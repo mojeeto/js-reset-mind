@@ -48,6 +48,24 @@ function createAndWriteOutput(operator, resultBeforeCalc, calcNumber) {
   outputResult(currentResult, calucationDescription); // from vendor js file
 }
 
+// this function help to log calcuation via logEntries
+function writeToLog(
+  operaionIndentifier,
+  prevResult,
+  operationNumber,
+  newResult,
+) {
+  const logEntry = {
+    operaionIndentifier,
+    prevResult,
+    operationNumber,
+    newResult,
+  };
+  logEntries.push(logEntry);
+  console.log(logEntries);
+  console.log("The result is " + logEntry.result);
+}
+
 // this function is for sum calcaution
 function add() {
   const enteredNumber = getUserInput();
@@ -56,7 +74,7 @@ function add() {
   currentResult += enteredNumber;
   createAndWriteOutput("+", initialResult, enteredNumber);
   // create an object that describe math operation
-  const logEntry = {
+  /*const logEntry = {
     operation: "ADD",
     prevResult: initialResult,
     number: enteredNumber,
@@ -68,6 +86,8 @@ function add() {
   console.log(logEntries);
   // use a data from our object
   console.log("The result is " + logEntry.result);
+  */
+  writeToLog("ADD", initialResult, enteredNumber, currentResult);
 }
 
 // this function is for subtract calcaution
@@ -77,6 +97,7 @@ function subtract() {
   const initialResult = currentResult;
   currentResult -= enteredNumber;
   createAndWriteOutput("-", initialResult, enteredNumber);
+  writeToLog("SUBTRACT", initialResult, enteredNumber, currentResult);
 }
 
 // this function is for multiply calcaution
@@ -86,6 +107,7 @@ function multiply() {
   const initialResult = currentResult;
   currentResult *= enteredNumber;
   createAndWriteOutput("*", initialResult, enteredNumber);
+  writeToLog("MULTIPLY", initialResult, enteredNumber, currentResult);
 }
 
 // this function is for divide calucation
@@ -95,6 +117,7 @@ function divide() {
   const initialResult = currentResult;
   currentResult /= enteredNumber;
   createAndWriteOutput("/", initialResult, enteredNumber);
+  writeToLog("DIVIDE", initialResult, enteredNumber, currentResult);
 }
 
 // assign function to buttons in index.html
