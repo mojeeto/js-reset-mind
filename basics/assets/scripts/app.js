@@ -31,6 +31,7 @@ let currentResult = defaultResult;
 
 //let calculationDescription = `(${defaultResult} + 10) * 3 / 2 - 1`;
 
+// this function is for extract user input and cast it to integer
 function getUserInput() {
   // using parseInt
   //currentResult = currentResult + Number.parseInt(userInput.value);
@@ -39,11 +40,13 @@ function getUserInput() {
   return parseInt(userInput.value);
 }
 
+// this function generate log and show the result in html
 function createAndWriteOutput(operator, resultBeforeCalc, calcNumber) {
   const calucationDescription = `${resultBeforeCalc} ${operator} ${calcNumber}`;
-  outputResult(currentResult, calucationDescription);
+  outputResult(currentResult, calucationDescription); // from vendor js file
 }
 
+// this function is for sum calcaution
 function add() {
   const enteredNumber = getUserInput();
   // store the last calucation input
@@ -52,7 +55,7 @@ function add() {
   createAndWriteOutput("+", initialResult, enteredNumber);
 }
 
-// subtract
+// this function is for subtract calcaution
 function subtract() {
   const enteredNumber = getUserInput();
   // store the last calucation input
@@ -60,7 +63,8 @@ function subtract() {
   currentResult -= enteredNumber;
   createAndWriteOutput("-", initialResult, enteredNumber);
 }
-// multiply
+
+// this function is for multiply calcaution
 function multiply() {
   const enteredNumber = getUserInput();
   // store the last calucation input
@@ -69,7 +73,7 @@ function multiply() {
   createAndWriteOutput("*", initialResult, enteredNumber);
 }
 
-// divide
+// this function is for divide calucation
 function divide() {
   const enteredNumber = getUserInput();
   // store the last calucation input
@@ -78,6 +82,7 @@ function divide() {
   createAndWriteOutput("/", initialResult, enteredNumber);
 }
 
+// assign function to buttons in index.html
 addBtn.addEventListener("click", add);
 subtractBtn.addEventListener("click", subtract);
 multiplyBtn.addEventListener("click", multiply);
