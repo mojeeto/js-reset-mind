@@ -55,6 +55,17 @@ function add() {
   const initialResult = currentResult;
   currentResult += enteredNumber;
   createAndWriteOutput("+", initialResult, enteredNumber);
+  // create an object that describe math operation
+  const logEntry = {
+    operation: "ADD",
+    prevResult: initialResult,
+    number: enteredNumber,
+    result: currentResult,
+  };
+  // add to our logEntries array
+  logEntries.push(logEntry);
+  // also check the logEntries data via console.log api
+  console.log(logEntries);
 }
 
 // this function is for subtract calcaution
