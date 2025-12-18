@@ -32,19 +32,55 @@ let currentResult = defaultResult;
 //let calculationDescription = `(${defaultResult} + 10) * 3 / 2 - 1`;
 
 function getUserInput() {
+  // using parseInt
+  //currentResult = currentResult + Number.parseInt(userInput.value);
+  // easy way
+  //currentResult = currentResult + +userInput.value;
   return parseInt(userInput.value);
+}
+
+function createAndWriteOutput(operator, resultBeforeCalc, calcNumber) {
+  const calucationDescription = `${resultBeforeCalc} ${operator} ${calcNumber}`;
+  outputResult(currentResult, calucationDescription);
 }
 
 function add() {
   const enteredNumber = getUserInput();
-  const calucationDescription = `${currentResult} + ${enteredNumber}`;
-  // using parseInt
-  //currentResult = currentResult + Number.parseInt(userInput.value);
-  // easy way
-  currentResult = currentResult + +userInput.value;
-  outputResult(currentResult, calucationDescription);
+  // store the last calucation input
+  const initialResult = currentResult;
+  currentResult += enteredNumber;
+  createAndWriteOutput("+", initialResult, enteredNumber);
+}
+
+// subtract
+function subtract() {
+  const enteredNumber = getUserInput();
+  // store the last calucation input
+  const initialResult = currentResult;
+  currentResult -= enteredNumber;
+  createAndWriteOutput("-", initialResult, enteredNumber);
+}
+// multiply
+function multiply() {
+  const enteredNumber = getUserInput();
+  // store the last calucation input
+  const initialResult = currentResult;
+  currentResult *= enteredNumber;
+  createAndWriteOutput("*", initialResult, enteredNumber);
+}
+
+// divide
+function divide() {
+  const enteredNumber = getUserInput();
+  // store the last calucation input
+  const initialResult = currentResult;
+  currentResult /= enteredNumber;
+  createAndWriteOutput("/", initialResult, enteredNumber);
 }
 
 addBtn.addEventListener("click", add);
+subtractBtn.addEventListener("click", subtract);
+multiplyBtn.addEventListener("click", multiply);
+divideBtn.addEventListener("click", divide);
 
 //outputResult(currentResult, calculationDescription);
