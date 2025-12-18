@@ -8,4 +8,9 @@
  *  Snake_Case, start with - (Dashes), or Whitespace in name
  *  and don't use reserved keywords
  * */
-const resultNumber = 0;
+let resultNumber = 0;
+
+// do mathematical operaitors
+resultNumber = resultNumber + 10 ** 6 / 50 - (100 % 2);
+
+outputResult(resultNumber, "");
