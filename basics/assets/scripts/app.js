@@ -8,9 +8,12 @@
  *  Snake_Case, start with - (Dashes), or Whitespace in name
  *  and don't use reserved keywords
  * */
-let resultNumber = 0;
+const defaultResult = 0;
+let currentResult = defaultResult;
 
 // do mathematical operaitors
-resultNumber = resultNumber + 10 ** 6 / 50 - (100 % 2);
+currentResult = ((currentResult + 10) * 3) / 2 - 1;
 
-outputResult(resultNumber, "");
+let calculationDescription = `(${defaultResult} + 10) * 3 / 2 - 1`;
+
+outputResult(currentResult, calculationDescription);
