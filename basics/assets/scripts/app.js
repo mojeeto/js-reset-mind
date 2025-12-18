@@ -66,6 +66,8 @@ function add() {
   logEntries.push(logEntry);
   // also check the logEntries data via console.log api
   console.log(logEntries);
+  // use a data from our object
+  console.log("The result is " + logEntry.result);
 }
 
 // this function is for subtract calcaution
