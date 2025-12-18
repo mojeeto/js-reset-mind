@@ -11,6 +11,8 @@
 const defaultResult = 0;
 let currentResult = defaultResult;
 // let name = "Mojtaba";
+// declare the first array
+const logEntries = [];
 
 // Create custom Function
 /*function sum(num1, num2) {
