@@ -66,6 +66,17 @@ function writeToLog(
   console.log("The result is " + logEntry.result);
 }
 
+// this function is calculate two numbers by their options
+// i think this function not neccessry but i write new if statement
+/*function calucation(operation, prevResult, number) {
+  let signOperation;
+  if (operation === "ADD") {
+    currentResult = prevResult + number;
+    signOperation = '+';
+  }
+  if (!signOperation) return;
+}*/
+
 // this function is for sum calcaution
 function add() {
   const enteredNumber = getUserInput();
