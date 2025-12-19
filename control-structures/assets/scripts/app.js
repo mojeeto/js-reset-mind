@@ -66,6 +66,15 @@ function writeToLog(
   console.log("The result is " + logEntry.result);
 }
 
+/*
+ * in if statement we use boolean condition
+ * == => is for check equlity
+ * != => will return true if two variable not equal
+ * === => check value and type also
+ * >= & <= || < & > ==> their are greater than and less than
+ * their are so essential
+ * */
+
 // this function is calculate two numbers by their options
 // i think this function not neccessry but i write new if statement
 /*function calucation(operation, prevResult, number) {
