@@ -51,3 +51,16 @@ HrTagInConsole();
 const startGameAnonymouseFunction = function () {
   console.log("Starting Game...");
 };
+
+// <HR />
+HrTagInConsole();
+
+/*
+ *
+ * function statements are hoisted on top of the file
+ * but expression function are not hoisted on top of the file
+ * the u have to initialize expression function before to use
+ * but the statement function you can use the function before
+ * initialize or declare
+ *
+ * */
