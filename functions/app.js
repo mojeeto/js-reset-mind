@@ -7,6 +7,11 @@ const PAPAER = "PAPAER";
 const SCISSORS = "SCISSORS";
 const DEFAULT_USER_INPUT = ROCK;
 
+// result default constants
+const RESULT_DRAW = "DRAW";
+const RESULT_COMPUTER_WIN = "COMPUTER WIN";
+const RESULT_PLAYER_WIN = "PLAYER WIN";
+
 const playerSelection = () => {
   // get propmt from user
   const userInput = prompt(
@@ -22,6 +27,26 @@ const playerSelection = () => {
   return userInput;
 };
 
+const computerSelection = () => {
+  const randomNumber = Math.random();
+  if (randomNumber < 0.34) return ROCK;
+  else if (randomNumber < 0.67) return PAPAER;
+  else return SCISSORS;
+};
+
+const getWinner = (computerChoise, playerChoise) => {
+  if (computerChoise === playerChoise) return RESULT_DRAW;
+  else if (
+    (playerChoise === ROCK && computerChoise === SCISSORS) ||
+    (playerChoise === PAPAER &&
+      computerChoise === ROCK &&
+      playerChoise === SCISSORS &&
+      computerChoise === PAPAER)
+  )
+    return RESULT_PLAYER_WIN;
+  else return RESULT_COMPUTER_WIN;
+};
+
 // show the game is runnig or not
 let isGameRunning = false;
 
@@ -30,8 +55,10 @@ startGameBtn.addEventListener("click", () => {
   if (isGameRunning) return;
   // underwise make it true
   isGameRunning = true;
-  const playerInput = playerSelection();
-  console.log(playerInput);
+  const playerChoise = playerSelection();
+  const computerChoise = computerSelection();
+  const winner = getWinner(computerChoise, playerChoise);
+  console.log(winner);
   isGameRunning = false;
 });
 
