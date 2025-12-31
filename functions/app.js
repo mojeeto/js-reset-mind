@@ -6,6 +6,7 @@ function HrTagInConsole() {
 const startGameBtn = document.getElementById("start-game-btn");
 
 // directly function use
+// function statement
 function startGame(mode) {
   console.log(`${mode}: Starting Game...`);
 }
@@ -41,3 +42,12 @@ console.log(
   `Function is typeof ${typeof startGame} but they have object inside that means:`,
 );
 console.dir(startGame);
+
+// <HR />
+HrTagInConsole();
+
+// Anonymouse Function Type 1
+// function expression
+const startGameAnonymouseFunction = function () {
+  console.log("Starting Game...");
+};
