@@ -37,5 +37,7 @@ HrTagInConsole();
 
 console.log("Functions are objects.");
 console.log("For prove that look the next line:");
-console.log(typeof startGame);
-
+console.log(
+  `Function is typeof ${typeof startGame} but they have object inside that means:`,
+);
+console.dir(startGame);
