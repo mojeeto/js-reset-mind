@@ -10,3 +10,8 @@ for (const listItemElement of listItemsElements) {
   listItemElement.textContent += " new number";
   console.dir(listItemElement);
 }
+
+const h1 = document.getElementById("main-title");
+h1.style.color = "white";
+h1.style.backgroundColor = "black";
+h1.style.padding = "5px 10px";
