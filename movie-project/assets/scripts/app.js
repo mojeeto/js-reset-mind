@@ -3,6 +3,9 @@
 // { title, imageUrl, rating }
 const movies = [];
 
+// static ID counter
+const ID = { number: 0 };
+
 // connect to add movie button on header
 const addMovieButton = document.querySelector("header button");
 // connect to hidden modal for adding new movie
@@ -27,8 +30,18 @@ const updateUI = () => {
   else entryText.style.display = "none";
 };
 
+// function for after click on movie item then delete the movie item
+const deleteMovieItemHandler = (movieItem, id) => {
+  const indexOfClickedItem = movies.findIndex(
+    ({ id: movieId }) => movieId === id,
+  );
+  if (indexOfClickedItem !== -1) movies.splice(indexOfClickedItem, 1);
+  movieList.removeChild(movieItem);
+  updateUI();
+};
+
 // function for add new movie item in list
-const addNewMovieItem = (title, imageUrl, rating) => {
+const addNewMovieItem = (id, title, imageUrl, rating) => {
   const newItem = document.createElement("li");
   newItem.classList.add("movie-element");
   newItem.innerHTML = `
@@ -39,6 +52,10 @@ const addNewMovieItem = (title, imageUrl, rating) => {
             <h2>${title}</h2>
             <p>${rating}/5 starts</p>
           </div> `;
+  newItem.addEventListener(
+    "click",
+    deleteMovieItemHandler.bind(this, newItem, id),
+  );
   movieList.append(newItem);
 };
 
@@ -77,14 +94,14 @@ const addNewMovieHandler = () => {
   }
 
   const newMovie = {
+    id: ++ID.number,
     title,
     imageUrl,
     rating,
   };
 
   movies.push(newMovie);
-  console.log(movies); // TODO::DELETE THIS LINE
-  addNewMovieItem(title, imageUrl, rating);
+  addNewMovieItem(newMovie.id, title, imageUrl, rating);
   toggleAddMovieModal();
 };
 
@@ -93,6 +110,11 @@ addMovieButton.addEventListener("click", toggleAddMovieModal);
 
 // add event listener for clicking add button in addMovieModal
 acceptAddMovieModal.addEventListener("click", addNewMovieHandler);
+// create a listner for 'Enter Key' in keyboard for add new item movie
+addMovieModal.addEventListener("keydown", (event) => {
+  if (addMovieModal.classList.contains("visible"))
+    if (event.key === "Enter") addNewMovieHandler();
+});
 
 // add event listner for clicking cancel button of addMovieModal
 cancelAddMovieModal.addEventListener("click", toggleAddMovieModal);
