@@ -22,8 +22,6 @@ const deleteModal = document.getElementById("delete-modal");
 // connet to cancel button in deleteMovieModal
 const cancelDeleteModal =
   deleteModal.querySelector(".modal__actions").firstElementChild;
-// connect to add button in deleteMovieModal
-const acceptDeleteMovieModal = cancelDeleteModal.nextElementSibling;
 // connect to the backdrop
 const backdrop = document.getElementById("backdrop");
 // connect to entryText
@@ -67,6 +65,7 @@ const closeDeleteMovieModal = () => {
   closeModalAndBackdrop();
   clearUserInputAddMovieModal();
   updateUI();
+  clearUserInputAddMovieModal();
 };
 
 // function for updating display entryText
@@ -82,13 +81,19 @@ const deleteMovieItemHandler = (movieItem, id) => {
   );
   if (indexOfClickedItem !== -1) movies.splice(indexOfClickedItem, 1);
   movieList.removeChild(movieItem);
-  // TODO::remove child error while deleting
   closeModalAndBackdrop();
   updateUI();
 };
 
 const confirmDeletation = (newItem, id) => {
   openDeleteMovieModal();
+  // connect to add button in deleteMovieModal
+  let acceptDeleteMovieModal = cancelDeleteModal.nextElementSibling;
+
+  acceptDeleteMovieModal.replaceWith(acceptDeleteMovieModal.cloneNode(true));
+
+  acceptDeleteMovieModal = cancelDeleteModal.nextElementSibling;
+
   acceptDeleteMovieModal.addEventListener(
     "click",
     deleteMovieItemHandler.bind(this, newItem, id),
