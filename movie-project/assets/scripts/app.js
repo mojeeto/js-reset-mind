@@ -17,16 +17,10 @@ const toggleAddMovieModal = () => {
 };
 
 // Add event listener for clicking addMovieButton
-addMovieButton.addEventListener("click", () => {
-  toggleAddMovieModal();
-});
+addMovieButton.addEventListener("click", toggleAddMovieModal);
 
 // add event listner for clicking cancel button of addMovieModal
-cancelAddMovieModal.addEventListener("click", () => {
-  toggleAddMovieModal();
-});
+cancelAddMovieModal.addEventListener("click", toggleAddMovieModal);
 
 // Add event listner for clicking backdrop
-backdrop.addEventListener("click", () => {
-  toggleAddMovieModal();
-});
+backdrop.addEventListener("click", toggleAddMovieModal);
