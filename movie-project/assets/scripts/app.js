@@ -1,3 +1,8 @@
+// Movie db
+// that contains list of movie object
+// { title, imageUrl, rating }
+const movies = [];
+
 // connect to add movie button on header
 const addMovieButton = document.querySelector("header button");
 // connect to hidden modal for adding new movie
@@ -18,6 +23,12 @@ const toggleAddMovieModal = () => {
   // also show the backdrop
   addMovieModal.classList.toggle("visible");
   backdrop.classList.toggle("visible");
+  clearUserInputAddMovieModal();
+};
+
+// function for deleting value of each user input in addMovieModal
+const clearUserInputAddMovieModal = () => {
+  for (const userInput of userInputs) userInput.value = "";
 };
 
 // function for handling userinputs data for adding
@@ -39,7 +50,15 @@ const addNewMovieHandler = () => {
     return;
   }
 
-  console.log("OK");
+  const newMovie = {
+    title,
+    imageUrl,
+    rating,
+  };
+
+  movies.push(newMovie);
+  console.log(movies); // TODO::DELETE THIS LINE
+  toggleAddMovieModal();
 };
 
 // Add event listener for clicking addMovieButton
