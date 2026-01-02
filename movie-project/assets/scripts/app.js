@@ -82,6 +82,7 @@ const deleteMovieItemHandler = (movieItem, id) => {
   );
   if (indexOfClickedItem !== -1) movies.splice(indexOfClickedItem, 1);
   movieList.removeChild(movieItem);
+  // TODO::remove child error while deleting
   closeModalAndBackdrop();
   updateUI();
 };
