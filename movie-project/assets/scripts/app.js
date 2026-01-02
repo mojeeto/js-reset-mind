@@ -58,18 +58,21 @@ const updateUI = () => {
 
 // function for after click on movie item then delete the movie item
 const deleteMovieItemHandler = (movieItem, id) => {
-  if (!confirmDeletation()) return;
   const indexOfClickedItem = movies.findIndex(
     ({ id: movieId }) => movieId === id,
   );
   if (indexOfClickedItem !== -1) movies.splice(indexOfClickedItem, 1);
   movieList.removeChild(movieItem);
+  toggleDeleteMovieModal();
   updateUI();
 };
 
-const confirmDeletation = () => {
+const confirmDeletation = (newItem, id) => {
   toggleDeleteMovieModal();
-  return false;
+  acceptDeleteMovieModal.addEventListener(
+    "click",
+    deleteMovieItemHandler.bind(this, newItem, id),
+  );
 };
 
 // function for add new movie item in list
@@ -84,10 +87,7 @@ const addNewMovieItem = (id, title, imageUrl, rating) => {
             <h2>${title}</h2>
             <p>${rating}/5 starts</p>
           </div> `;
-  newItem.addEventListener(
-    "click",
-    deleteMovieItemHandler.bind(this, newItem, id),
-  );
+  newItem.addEventListener("click", confirmDeletation.bind(this, newItem, id));
   movieList.append(newItem);
 };
 
