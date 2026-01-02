@@ -17,6 +17,13 @@ const cancelAddMovieModal =
   addMovieModal.querySelector(".modal__actions").firstElementChild;
 // connect to add button in addMovieModal
 const acceptAddMovieModal = cancelAddMovieModal.nextElementSibling;
+// connect to delete Modal for confirmDeletation
+const deleteModal = document.getElementById("delete-modal");
+// connet to cancel button in deleteMovieModal
+const cancelDeleteModal =
+  deleteModal.querySelector(".modal__actions").firstElementChild;
+// connect to add button in deleteMovieModal
+const acceptDeleteMovieModal = cancelDeleteModal.nextElementSibling;
 // connect to the backdrop
 const backdrop = document.getElementById("backdrop");
 // connect to entryText
@@ -24,6 +31,25 @@ const entryText = document.getElementById("entry-text");
 // connect to ul of movies
 const movieList = document.getElementById("movie-list");
 
+// toggle backdrop visibility
+const toggleBackdrop = () => {
+  backdrop.classList.toggle("visible");
+};
+
+// function for visible backdrop and addMovieModal
+const toggleAddMovieModal = () => {
+  // toggle the hidden modal for adding new movie
+  addMovieModal.classList.toggle("visible");
+  toggleBackdrop();
+  clearUserInputAddMovieModal();
+  updateUI();
+};
+// function for visible backdrop and deleteMovieModal
+const toggleDeleteMovieModal = () => {
+  toggleBackdrop();
+  deleteModal.classList.toggle("visible");
+  updateUI();
+};
 // function for updating display entryText
 const updateUI = () => {
   if (movies.length === 0) entryText.style.display = "block";
@@ -32,12 +58,18 @@ const updateUI = () => {
 
 // function for after click on movie item then delete the movie item
 const deleteMovieItemHandler = (movieItem, id) => {
+  if (!confirmDeletation()) return;
   const indexOfClickedItem = movies.findIndex(
     ({ id: movieId }) => movieId === id,
   );
   if (indexOfClickedItem !== -1) movies.splice(indexOfClickedItem, 1);
   movieList.removeChild(movieItem);
   updateUI();
+};
+
+const confirmDeletation = () => {
+  toggleDeleteMovieModal();
+  return false;
 };
 
 // function for add new movie item in list
@@ -57,16 +89,6 @@ const addNewMovieItem = (id, title, imageUrl, rating) => {
     deleteMovieItemHandler.bind(this, newItem, id),
   );
   movieList.append(newItem);
-};
-
-// function for visible backdrop and addMovieModal
-const toggleAddMovieModal = () => {
-  // toggle the hidden modal for adding new movie
-  // also show the backdrop
-  addMovieModal.classList.toggle("visible");
-  backdrop.classList.toggle("visible");
-  clearUserInputAddMovieModal();
-  updateUI();
 };
 
 // function for deleting value of each user input in addMovieModal
@@ -124,6 +146,10 @@ document.addEventListener("keydown", (event) => {
 
 // add event listner for clicking cancel button of addMovieModal
 cancelAddMovieModal.addEventListener("click", toggleAddMovieModal);
+//
+// add event listner for clicking cancel button of deleteMovieModal
+cancelDeleteModal.addEventListener("click", toggleDeleteMovieModal);
 
 // Add event listner for clicking backdrop
-backdrop.addEventListener("click", toggleAddMovieModal);
+// backdrop.addEventListener("click", toggleBackdrop);
+// TODO::Figure out how to click in backdrop and close the backdrop also toggle the active modal
