@@ -16,6 +16,14 @@ const cancelAddMovieModal =
 const acceptAddMovieModal = cancelAddMovieModal.nextElementSibling;
 // connect to the backdrop
 const backdrop = document.getElementById("backdrop");
+// connect to entryText
+const entryText = document.getElementById("entry-text");
+
+// function for updating display entryText
+const updateUI = () => {
+  if (movies.length === 0) entryText.style.display = "block";
+  else entryText.style.display = "none";
+};
 
 // function for visible backdrop and addMovieModal
 const toggleAddMovieModal = () => {
@@ -24,6 +32,7 @@ const toggleAddMovieModal = () => {
   addMovieModal.classList.toggle("visible");
   backdrop.classList.toggle("visible");
   clearUserInputAddMovieModal();
+  updateUI();
 };
 
 // function for deleting value of each user input in addMovieModal
