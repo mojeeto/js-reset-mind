@@ -116,6 +116,12 @@ addMovieModal.addEventListener("keydown", (event) => {
     if (event.key === "Enter") addNewMovieHandler();
 });
 
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Dead") {
+    toggleAddMovieModal();
+  }
+});
+
 // add event listner for clicking cancel button of addMovieModal
 cancelAddMovieModal.addEventListener("click", toggleAddMovieModal);
 
