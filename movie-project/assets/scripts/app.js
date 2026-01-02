@@ -18,11 +18,28 @@ const acceptAddMovieModal = cancelAddMovieModal.nextElementSibling;
 const backdrop = document.getElementById("backdrop");
 // connect to entryText
 const entryText = document.getElementById("entry-text");
+// connect to ul of movies
+const movieList = document.getElementById("movie-list");
 
 // function for updating display entryText
 const updateUI = () => {
   if (movies.length === 0) entryText.style.display = "block";
   else entryText.style.display = "none";
+};
+
+// function for add new movie item in list
+const addNewMovieItem = (title, imageUrl, rating) => {
+  const newItem = document.createElement("li");
+  newItem.classList.add("movie-element");
+  newItem.innerHTML = `
+          <div class="movie-element__image">
+            <img src="${imageUrl}" alt="${title}" />
+          </div>
+          <div class="movie-element__info">
+            <h2>${title}</h2>
+            <p>${rating}/5 starts</p>
+          </div> `;
+  movieList.append(newItem);
 };
 
 // function for visible backdrop and addMovieModal
@@ -67,6 +84,7 @@ const addNewMovieHandler = () => {
 
   movies.push(newMovie);
   console.log(movies); // TODO::DELETE THIS LINE
+  addNewMovieItem(title, imageUrl, rating);
   toggleAddMovieModal();
 };
 
