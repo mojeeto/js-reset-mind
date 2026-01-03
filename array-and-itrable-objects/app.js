@@ -23,3 +23,11 @@ const removedData = hobbies.pop(); // remove the last index data of array
 hobbies.shift(); // remove the first index data of array
 // shift and unshift is slower of pop and push
 // because push and pop working with last data of array
+
+// with splice we can edit the array
+// numbers.splice(startIndex, deleteCount, items[])
+// numbers.splice(0) ==> clear the whole array
+// numbers.splice(0, 1) ==> delete the first item of array
+// numbers.splice(0, 1, "hello") ==> delete the first item and replace it with "hello"
+// splice also return the removed items
+// we can use -1 for selecting the last element of array
