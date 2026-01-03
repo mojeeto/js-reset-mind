@@ -31,3 +31,10 @@ hobbies.shift(); // remove the first index data of array
 // numbers.splice(0, 1, "hello") ==> delete the first item and replace it with "hello"
 // splice also return the removed items
 // we can use -1 for selecting the last element of array
+//
+// because the array is reference type we can use slice for copying array
+const exampleArray = ["Hello", "Mojtaba"];
+const example2Array = exampleArray.slice();
+
+// we can use slice for selecting multiple of data in array
+// exampleArray.slice(startIndex, endIndex);
