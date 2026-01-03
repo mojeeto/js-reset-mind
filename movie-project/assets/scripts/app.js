@@ -124,9 +124,10 @@ const clearUserInputAddMovieModal = () => {
 // function for handling userinputs data for adding
 // new movie detail
 const addNewMovieHandler = () => {
-  const title = userInputs[0].value;
-  const imageUrl = userInputs[1].value;
-  const rating = userInputs[2].value;
+  const [titleInput, imageUrlInput, ratingInput] = userInputs;
+  const title = titleInput.value;
+  const imageUrl = imageUrlInput.value;
+  const rating = ratingInput.value;
 
   // validation
   if (
