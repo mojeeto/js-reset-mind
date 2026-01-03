@@ -50,3 +50,6 @@ const finalArray = firstArray.concat(["Mojtaba"]);
 // find((element, index, array) => { return true; }) return the element finded
 // find doest not create a copy it's return the reference of that array
 // findIndex like find but return the index number
+//
+// array.includes(something) return true or false
+// it's like array.indexOf(something) !== -1
