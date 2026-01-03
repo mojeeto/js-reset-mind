@@ -8,3 +8,9 @@ const numbers = [1, 2, 3];
 const moreNumbers = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 // Also we can user Array instead of new array
 const moreNumbers2 = Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+const moreNumbers3 = Array.of(1, 2, 3, 4); // create array again
+
+// create array from itrable data that we gived
+// also it's can be HTMLCollection or NodeList
+const newArray = Array.from("Hello");
+console.log(newArray);
