@@ -53,3 +53,6 @@ const finalArray = firstArray.concat(["Mojtaba"]);
 //
 // array.includes(something) return true or false
 // it's like array.indexOf(something) !== -1
+//
+// forEach is just easy way for loop for arrays
+// map method is return the brand new of array, it's not touch the original array
