@@ -38,3 +38,5 @@ const example2Array = exampleArray.slice();
 
 // we can use slice for selecting multiple of data in array
 // exampleArray.slice(startIndex, endIndex);
+//
+// also slice support negetive numbers
