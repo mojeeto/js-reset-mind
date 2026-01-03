@@ -14,3 +14,12 @@ const moreNumbers3 = Array.of(1, 2, 3, 4); // create array again
 // also it's can be HTMLCollection or NodeList
 const newArray = Array.from("Hello");
 console.log(newArray);
+
+const hobbies = ["Sports", "Cooking"];
+hobbies.push("Reading"); // push the data to the end of array
+hobbies.unshift("Driving"); // add data to the first of array
+// pop return the removed data
+const removedData = hobbies.pop(); // remove the last index data of array
+hobbies.shift(); // remove the first index data of array
+// shift and unshift is slower of pop and push
+// because push and pop working with last data of array
