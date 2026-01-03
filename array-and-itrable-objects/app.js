@@ -44,3 +44,5 @@ const example2Array = exampleArray.slice();
 const firstArray = ["Hello"];
 // create brand new of array and copy of firstArray and concat that with that array we want and return it
 const finalArray = firstArray.concat(["Mojtaba"]);
+
+// indexOf and lastIndexOf find index of expected data from beginning of array and end of array
