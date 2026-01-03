@@ -40,3 +40,7 @@ const example2Array = exampleArray.slice();
 // exampleArray.slice(startIndex, endIndex);
 //
 // also slice support negetive numbers
+
+const firstArray = ["Hello"];
+// create brand new of array and copy of firstArray and concat that with that array we want and return it
+const finalArray = firstArray.concat(["Mojtaba"]);
