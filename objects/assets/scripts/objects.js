@@ -1,7 +1,11 @@
 // recap
+
+const userCustomKey = "level";
+
 const person = {
   "fore name": "Mojtaba",
   age: 24,
+  [userCustomKey]: "application",
   hobbies: ["Learning Computer Tec", "Driving", "Parkour"],
   greet: function () {
     console.log("Hello, World. I'm", this["fore name"]);
@@ -20,4 +24,5 @@ delete person.age;
 person.isAdming = true;
 
 person.greet();
+console.log(`Level is ${person[userCustomKey]}`);
 console.log(person);
