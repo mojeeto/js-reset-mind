@@ -29,7 +29,10 @@ const renderMovie = (filterTitlePattern = null) => {
   filteredMovies.forEach((movie) => {
     const newElement = document.createElement("li");
     // in this line movie object is responsible for calling the getFormattedTitle function
-    let text = movie.getFormattedTitle() + " - ";
+    //let text = movie.getFormattedTitle() + " - ";
+    let { getFormattedTitle } = movie;
+    getFormattedTitle = getFormattedTitle.bind(movie);
+    let text = getFormattedTitle() + " - ";
     for (const key in movie.info)
       if (key !== "title") text += `${key}: ${movie.info[key]}`;
     newElement.textContent = text;
