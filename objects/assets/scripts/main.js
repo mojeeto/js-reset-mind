@@ -20,7 +20,11 @@ const renderMovie = (filterTitlePattern = null) => {
     ? movies
     : movies.filter((movie) => movie.info.title.includes(filterTitlePattern));
 
-  console.log(filteredMovies);
+  // This is how to check an object have specific property or not
+  //if (!('info' in movies)) {
+  //if (movies.info === undefined) {
+  // do something
+  //}
 
   filteredMovies.forEach((movie) => {
     const newElement = document.createElement("li");
