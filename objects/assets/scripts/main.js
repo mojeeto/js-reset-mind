@@ -52,7 +52,8 @@ const addMovieBtnHandler = () => {
       title,
       [extraKey]: extraValue,
     },
-    getFormattedTitle: function () {
+    //getFormattedTitle: function () {
+    getFormattedTitle() {
       // `this` keyword is refere to who call this function
       return this.info.title.toUpperCase();
     },
