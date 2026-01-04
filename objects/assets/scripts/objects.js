@@ -1,10 +1,10 @@
 // recap
 const person = {
-  name: "Mojtaba",
+  "fore name": "Mojtaba",
   age: 24,
   hobbies: ["Learning Computer Tec", "Driving", "Parkour"],
   greet: function () {
-    console.log("Hello, World. I'm", this.name);
+    console.log("Hello, World. I'm", this["fore name"]);
   },
 };
 
