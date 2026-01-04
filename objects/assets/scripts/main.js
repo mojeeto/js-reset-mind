@@ -30,9 +30,18 @@ const renderMovie = (filterTitlePattern = null) => {
     const newElement = document.createElement("li");
     // in this line movie object is responsible for calling the getFormattedTitle function
     //let text = movie.getFormattedTitle() + " - ";
-    let { getFormattedTitle } = movie;
-    getFormattedTitle = getFormattedTitle.bind(movie);
-    let text = getFormattedTitle() + " - ";
+    //let { getFormattedTitle } = movie;
+    //getFormattedTitle = getFormattedTitle.bind(movie);
+    //let text = getFormattedTitle() + " - ";
+    // call method helps us to bind and call the method in the same time
+    // the bind method is create the new function and return it
+    // but the call method is create the new function with thisArg and arguments
+    // then call the new function with specific thisArg and arguments
+    const { getFormattedTitle } = movie;
+    let text = getFormattedTitle.call(movie) + " - ";
+    // apply method is also like the call method but it's accept thisArg and list of arguments
+    // that we want to pass to function
+
     for (const key in movie.info)
       if (key !== "title") text += `${key}: ${movie.info[key]}`;
     newElement.textContent = text;
