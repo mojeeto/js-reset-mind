@@ -28,7 +28,8 @@ const renderMovie = (filterTitlePattern = null) => {
 
   filteredMovies.forEach((movie) => {
     const newElement = document.createElement("li");
-    let text = movie.info.title + " - ";
+    // in this line movie object is responsible for calling the getFormattedTitle function
+    let text = movie.getFormattedTitle() + " - ";
     for (const key in movie.info)
       if (key !== "title") text += `${key}: ${movie.info[key]}`;
     newElement.textContent = text;
@@ -50,6 +51,10 @@ const addMovieBtnHandler = () => {
     info: {
       title,
       [extraKey]: extraValue,
+    },
+    getFormattedTitle: function () {
+      // `this` keyword is refere to who call this function
+      return this.info.title.toUpperCase();
     },
   };
 
