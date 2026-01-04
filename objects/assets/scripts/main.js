@@ -79,6 +79,9 @@ const addMovieBtnHandler = () => {
 //  const filteredTitleInput = document.getElementById("filter-title");
 //  renderMovie(filteredTitleInput.value);
 //};
+//
+// arrow function does not know about this
+// and arrow function always point to `this` out side of function
 
 const searchBtnHandler = function () {
   // as the instructor said the this in the event listner
