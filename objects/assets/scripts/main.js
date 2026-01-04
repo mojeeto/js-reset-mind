@@ -75,7 +75,20 @@ const addMovieBtnHandler = () => {
   renderMovie();
 };
 
-const searchBtnHandler = () => {
+//const searchBtnHandler = () => {
+//  const filteredTitleInput = document.getElementById("filter-title");
+//  renderMovie(filteredTitleInput.value);
+//};
+
+const searchBtnHandler = function () {
+  // as the instructor said the this in the event listner
+  // point to who call the function and in this situation
+  // the button that clicked is responsible for this function
+  // because it's callend after clicked
+  console.log(this); // this return the button tag
+  // the important notes that i have to mention is arrow function have different behavior
+  // with this topic, the normal anonymouse function will reciver of who
+  // responsible for the who call that
   const filteredTitleInput = document.getElementById("filter-title");
   renderMovie(filteredTitleInput.value);
 };
