@@ -37,13 +37,15 @@ const renderMovie = (filterTitlePattern = null) => {
     // the bind method is create the new function and return it
     // but the call method is create the new function with thisArg and arguments
     // then call the new function with specific thisArg and arguments
-    const { getFormattedTitle } = movie;
-    let text = getFormattedTitle.call(movie) + " - ";
+    //const { getFormattedTitle } = movie;
+    //let text = getFormattedTitle.call(movie) + " - ";
+    let text = movie.info.title + " - ";
     // apply method is also like the call method but it's accept thisArg and list of arguments
     // that we want to pass to function
 
     for (const key in movie.info)
-      if (key !== "title") text += `${key}: ${movie.info[key]}`;
+      if (key !== "title" && key !== "_title")
+        text += `${key}: ${movie.info[key]}`;
     newElement.textContent = text;
     moviesList.appendChild(newElement);
   });
@@ -55,13 +57,23 @@ const addMovieBtnHandler = () => {
   const extraValue = document.getElementById("extra-value").value;
 
   // validation
-  if (title.trim() === "" || extraKey.trim() === "" || extraValue.trim() === "")
-    return;
+  if (extraKey.trim() === "" || extraValue.trim() === "") return;
 
+  // we can create getter and setter for a property of object
+  // if we just define getter then the property will be a readonly
   const newMovie = {
     id: ++COUNTER.id,
     info: {
-      title,
+      set title(newValue) {
+        if (newValue.trim() === "") {
+          this._title = "DEFAULT";
+          return;
+        }
+        this._title = newValue;
+      },
+      get title() {
+        return this._title.toUpperCase();
+      },
       [extraKey]: extraValue,
     },
     //getFormattedTitle: function () {
@@ -70,6 +82,9 @@ const addMovieBtnHandler = () => {
       return this.info.title.toUpperCase();
     },
   };
+
+  // set title
+  newMovie.info.title = title;
 
   movies.push(newMovie);
   renderMovie();
