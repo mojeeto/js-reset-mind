@@ -3,24 +3,31 @@ class Product {
   description;
   imageUrl;
   price;
+
+  constructor(title, imageUrl, description, price) {
+    this.title = title;
+    this.imageUrl = imageUrl;
+    this.description = description;
+    this.price = price;
+  }
 }
 
 const productList = {
   products: [
-    {
-      title: "IPhone 17 Pro Max",
-      imageUrl: "something",
-      price: 899.99,
-      description: "This is a Phone for you",
-    },
-
-    {
-      title: "MacBook Pro 14inch M5(Apple Silicon)",
-      imageUrl: "something",
-      price: 1398.76,
-      description: "The Best labtop in the world!",
-    },
+    new Product(
+      "IPhone 17 Pro Max",
+      "something",
+      "This is a Phone for you",
+      899.99,
+    ),
+    new Product(
+      "MacBook Pro 14inch M5(Apple Silicon)",
+      "something",
+      "The Best labtop in the world!",
+      1398.76,
+    ),
   ],
+
   render() {
     const mainApp = document.getElementById("app");
     const productList = document.createElement("ul");
