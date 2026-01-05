@@ -12,8 +12,8 @@ class Product {
   }
 }
 
-const productList = {
-  products: [
+class ProductList {
+  products = [
     new Product(
       "IPhone 17 Pro Max",
       "something",
@@ -26,7 +26,7 @@ const productList = {
       "The Best labtop in the world!",
       1398.76,
     ),
-  ],
+  ];
 
   render() {
     const mainApp = document.getElementById("app");
@@ -48,7 +48,7 @@ const productList = {
       productList.append(productElement);
     }
     mainApp.append(productList);
-  },
-};
+  }
+}
 
-productList.render();
+new ProductList().render();
