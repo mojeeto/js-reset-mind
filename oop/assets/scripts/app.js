@@ -22,7 +22,7 @@ class ShoppingCart {
 
   addProduct(product) {
     this.items.push(product);
-    this.price += product.price;
+    this.price = Math.round((this.price + product.price) * 100) / 100;
     this.shopInstance.reRender();
   }
 
@@ -48,7 +48,8 @@ class ProductItem {
   // but the regular function always for this keyword refer to who call that method
   // or function whatever
   addToCart() {
-    this.shoppingCart.addProduct(this.product);
+    //this.shoppingCart.addProduct(this.product);
+    App.addProduct(this.product);
   }
 
   render() {
@@ -119,9 +120,21 @@ class Shop {
   }
 }
 
+// instructure in this lecture use static as call addProduct in ShoppingCart
+// but i'm using dependency injection and it's ok i think if it's not leak the memeory
+// i hope that javascript GC can handler this
+
 class App {
+  static cart = null;
+
   static init() {
-    new Shop().render();
+    const shop = new Shop();
+    this.cart = shop.shoppingCart;
+    shop.render();
+  }
+
+  static addProduct(product) {
+    if (this.cart !== null) this.cart.addProduct(product);
   }
 }
 
