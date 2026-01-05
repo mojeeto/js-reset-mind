@@ -63,15 +63,35 @@ class ProductList {
   ];
 
   render() {
-    const mainApp = document.getElementById("app");
     const productList = document.createElement("ul");
     productList.classList.add("product-list");
     for (const product of this.products) {
       const productItem = new ProductItem(product);
       productList.append(productItem.render());
     }
-    mainApp.append(productList);
+    return productList;
   }
 }
 
-new ProductList().render();
+class ShoppingCart {
+  items = [];
+
+  render() {
+    const sectionElement = document.createElement("section");
+    sectionElement.innerHTML = `
+        <h2>Tital: ${0}</h2>
+        <button>Order Now!</button> `;
+    sectionElement.classList.add("cart");
+    return sectionElement;
+  }
+}
+
+class Shop {
+  render() {
+    const renderHook = document.getElementById("app");
+    renderHook.append(new ShoppingCart().render());
+    renderHook.append(new ProductList().render());
+  }
+}
+
+new Shop().render();
