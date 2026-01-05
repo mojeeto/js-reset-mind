@@ -12,9 +12,34 @@ class Product {
   }
 }
 
+class ShoppingCart {
+  items = [];
+  price = 0;
+
+  constructor(shopInstance) {
+    this.shopInstance = shopInstance;
+  }
+
+  addProduct(product) {
+    this.items.push(product);
+    this.price += product.price;
+    this.shopInstance.reRender();
+  }
+
+  render() {
+    const sectionElement = document.createElement("section");
+    sectionElement.innerHTML = `
+        <h2>Tital: \$${this.price}</h2>
+        <button>Order Now!</button> `;
+    sectionElement.classList.add("cart");
+    return sectionElement;
+  }
+}
+
 class ProductItem {
-  constructor(product) {
+  constructor(product, shoppingCart) {
     this.product = product;
+    this.shoppingCart = shoppingCart;
   }
 
   // i figure out we can use arrow function for this method
@@ -23,8 +48,7 @@ class ProductItem {
   // but the regular function always for this keyword refer to who call that method
   // or function whatever
   addToCart() {
-    console.log("Add To Cart Button");
-    console.log(this.product);
+    this.shoppingCart.addProduct(this.product);
   }
 
   render() {
@@ -47,6 +71,10 @@ class ProductItem {
 }
 
 class ProductList {
+  constructor(shoppingCart) {
+    this.shoppingCart = shoppingCart;
+  }
+
   products = [
     new Product(
       "IPhone 17 Pro Max",
@@ -66,31 +94,28 @@ class ProductList {
     const productList = document.createElement("ul");
     productList.classList.add("product-list");
     for (const product of this.products) {
-      const productItem = new ProductItem(product);
+      const productItem = new ProductItem(product, this.shoppingCart);
       productList.append(productItem.render());
     }
     return productList;
   }
 }
 
-class ShoppingCart {
-  items = [];
-
-  render() {
-    const sectionElement = document.createElement("section");
-    sectionElement.innerHTML = `
-        <h2>Tital: ${0}</h2>
-        <button>Order Now!</button> `;
-    sectionElement.classList.add("cart");
-    return sectionElement;
-  }
-}
-
 class Shop {
+  constructor() {
+    this.shoppingCart = new ShoppingCart(this);
+    this.productList = new ProductList(this.shoppingCart);
+    this.renderHook = document.getElementById("app");
+  }
+
   render() {
-    const renderHook = document.getElementById("app");
-    renderHook.append(new ShoppingCart().render());
-    renderHook.append(new ProductList().render());
+    this.renderHook.append(this.shoppingCart.render());
+    this.renderHook.append(this.productList.render());
+  }
+
+  reRender() {
+    this.renderHook.innerHTML = "";
+    this.render();
   }
 }
 
