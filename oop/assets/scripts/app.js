@@ -12,6 +12,28 @@ class Product {
   }
 }
 
+class ProductItem {
+  constructor(product) {
+    this.product = product;
+  }
+
+  render() {
+    const productElement = document.createElement("li");
+    productElement.classList.add("product-item");
+    productElement.innerHTML = `
+          <div>
+            <!-- <img src='${this.product.imageUrl}' alt="${this.product.title}" /> -->
+            <div class="product-item__content">
+              <h2>${this.product.title}</h2>
+              <h3>\$${this.product.price}</h3>
+              <p>${this.product.description}</p>
+              <button>Add to Cart</button>
+            </div>
+          </div>`;
+    return productElement;
+  }
+}
+
 class ProductList {
   products = [
     new Product(
@@ -33,19 +55,8 @@ class ProductList {
     const productList = document.createElement("ul");
     productList.classList.add("product-list");
     for (const product of this.products) {
-      const productElement = document.createElement("li");
-      productElement.classList.add("product-item");
-      productElement.innerHTML = `
-          <div>
-            <!-- <img src='${product.imageUrl}' alt="${product.title}" /> -->
-            <div class="product-item__content">
-              <h2>${product.title}</h2>
-              <h3>\$${product.price}</h3>
-              <p>${product.description}</p>
-              <button>Add to Cart</button>
-            </div>
-          </div>`;
-      productList.append(productElement);
+      const productItem = new ProductItem(product);
+      productList.append(productItem.render());
     }
     mainApp.append(productList);
   }
