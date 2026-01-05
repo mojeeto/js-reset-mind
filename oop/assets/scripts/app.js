@@ -17,6 +17,16 @@ class ProductItem {
     this.product = product;
   }
 
+  // i figure out we can use arrow function for this method
+  // bese the arrow functions always for this keyword refer to outside of
+  // the method or function whatever
+  // but the regular function always for this keyword refer to who call that method
+  // or function whatever
+  addToCart() {
+    console.log("Add To Cart Button");
+    console.log(this.product);
+  }
+
   render() {
     const productElement = document.createElement("li");
     productElement.classList.add("product-item");
@@ -30,6 +40,8 @@ class ProductItem {
               <button>Add to Cart</button>
             </div>
           </div>`;
+    const addToCartBtn = productElement.querySelector("button");
+    addToCartBtn.addEventListener("click", this.addToCart.bind(this));
     return productElement;
   }
 }
