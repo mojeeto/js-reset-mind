@@ -94,4 +94,10 @@ class Shop {
   }
 }
 
-new Shop().render();
+class App {
+  static init() {
+    new Shop().render();
+  }
+}
+
+App.init();
