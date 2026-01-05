@@ -12,26 +12,46 @@ class Product {
   }
 }
 
+// the other way of updating total price is that get reference of h2 tag
+// then after update items, change the innerHTML of h2 tag
 class ShoppingCart {
   items = [];
-  price = 0;
+  // price = 0;
+
+  // use getter and setter for pushing products in items field
+  set cartItem(value) {
+    this.items = value;
+    this.totalOutputHTML.textContent = `Total: \$${this.totalAmout.toFixed(2)}`;
+  }
+
+  get cartItem() {
+    return this.items;
+  }
+
+  // this field it's just return total amount of products price in items field
+  get totalAmout() {
+    return this.items.reduce((pValue, nValue) => pValue + nValue.price, 0);
+  }
 
   constructor(shopInstance) {
     this.shopInstance = shopInstance;
   }
 
   addProduct(product) {
-    this.items.push(product);
-    this.price = Math.round((this.price + product.price) * 100) / 100;
-    this.shopInstance.reRender();
+    this.cartItem = [...this.cartItem, product];
+    //this.items.push(product);
+    //this.price = Math.round((this.price + product.price) * 100) / 100;
+    //this.shopInstance.reRender();
   }
 
   render() {
     const sectionElement = document.createElement("section");
     sectionElement.innerHTML = `
-        <h2>Tital: \$${this.price}</h2>
+        <h2>Total: \$${0}</h2>
         <button>Order Now!</button> `;
     sectionElement.classList.add("cart");
+    // use query selector for live changable and get the first h2 tag
+    this.totalOutputHTML = sectionElement.querySelector("h2");
     return sectionElement;
   }
 }
