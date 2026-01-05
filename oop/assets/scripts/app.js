@@ -12,9 +12,31 @@ class Product {
   }
 }
 
+class Component {
+  constructor(renderHookId) {
+    this.renderHookId = renderHookId;
+  }
+
+  createRootElement(tagName = "", className = "", attributes = []) {
+    let element = document.createElement("div");
+    if (tagName && tagName !== "") element = document.createElement(tagName);
+    if (className && className !== "") element.className = className;
+    if (attributes && attributes.length > [])
+      for (const attribute in attributes)
+        if (
+          typeof attribute === "object" &&
+          attribute.keyName !== undefined &&
+          attribute.keyValue !== undefined
+        )
+          element.attributes(attribute.keyName, attribute.keyValue);
+    document.getElementById(this.renderHookId).append(element);
+    return element;
+  }
+}
+
 // the other way of updating total price is that get reference of h2 tag
 // then after update items, change the innerHTML of h2 tag
-class ShoppingCart {
+class ShoppingCart extends Component {
   items = [];
   // price = 0;
 
@@ -33,7 +55,8 @@ class ShoppingCart {
     return this.items.reduce((pValue, nValue) => pValue + nValue.price, 0);
   }
 
-  constructor(shopInstance) {
+  constructor(renderHookId, shopInstance) {
+    super(renderHookId);
     this.shopInstance = shopInstance;
   }
 
@@ -45,14 +68,14 @@ class ShoppingCart {
   }
 
   render() {
-    const sectionElement = document.createElement("section");
+    // const sectionElement = document.createElement('section');
+    const sectionElement = this.createRootElement("section", "cart");
     sectionElement.innerHTML = `
         <h2>Total: \$${0}</h2>
         <button>Order Now!</button> `;
-    sectionElement.classList.add("cart");
+    //sectionElement.classList.add("cart");
     // use query selector for live changable and get the first h2 tag
     this.totalOutputHTML = sectionElement.querySelector("h2");
-    return sectionElement;
   }
 }
 
@@ -124,13 +147,14 @@ class ProductList {
 
 class Shop {
   constructor() {
-    this.shoppingCart = new ShoppingCart(this);
+    this.shoppingCart = new ShoppingCart("app", this);
     this.productList = new ProductList(this.shoppingCart);
     this.renderHook = document.getElementById("app");
   }
 
   render() {
-    this.renderHook.append(this.shoppingCart.render());
+    // this.renderHook.append(this.shoppingCart.render());
+    this.shoppingCart.render();
     this.renderHook.append(this.productList.render());
   }
 
