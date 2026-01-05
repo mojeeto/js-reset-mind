@@ -1,0 +1,40 @@
+const productList = {
+  products: [
+    {
+      title: "IPhone 17 Pro Max",
+      imageUrl: "something",
+      price: 899.99,
+      description: "This is a Phone for you",
+    },
+
+    {
+      title: "MacBook Pro 14inch M5(Apple Silicon)",
+      imageUrl: "something",
+      price: 1398.76,
+      description: "The Best labtop in the world!",
+    },
+  ],
+  render() {
+    const mainApp = document.getElementById("app");
+    const productList = document.createElement("ul");
+    productList.classList.add("product-list");
+    for (const product of this.products) {
+      const productElement = document.createElement("li");
+      productElement.classList.add("product-item");
+      productElement.innerHTML = `
+          <div>
+            <!-- <img src='${product.imageUrl}' alt="${product.title}" /> -->
+            <div class="product-item__content">
+              <h2>${product.title}</h2>
+              <h3>\$${product.price}</h3>
+              <p>${product.description}</p>
+              <button>Add to Cart</button>
+            </div>
+          </div>`;
+      productList.append(productElement);
+    }
+    mainApp.append(productList);
+  },
+};
+
+productList.render();
