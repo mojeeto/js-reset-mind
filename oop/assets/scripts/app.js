@@ -20,9 +20,9 @@ class ElementAttribute {
 }
 
 class Component {
-  constructor(renderHookId) {
+  constructor(renderHookId, shouldRender = true) {
     this.renderHookId = renderHookId;
-    this.render();
+    if (shouldRender) this.render();
   }
 
   render() {}
@@ -86,9 +86,10 @@ class ShoppingCart extends Component {
 
 class ProductItem extends Component {
   constructor(renderHookId, product, shoppingCart) {
-    super(renderHookId);
+    super(renderHookId, false);
     this.product = product;
     this.shoppingCart = shoppingCart;
+    this.render();
   }
 
   // i figure out we can use arrow function for this method
@@ -121,32 +122,42 @@ class ProductItem extends Component {
 }
 
 class ProductList extends Component {
-  products = [
-    new Product(
-      "IPhone 17 Pro Max",
-      "something",
-      "This is a Phone for you",
-      899.99,
-    ),
-    new Product(
-      "MacBook Pro 14inch M5(Apple Silicon)",
-      "something",
-      "The Best labtop in the world!",
-      1398.76,
-    ),
-  ];
+  products = [];
 
   constructor(renderHookId, shoppingCart) {
     super(renderHookId);
     this.shoppingCart = shoppingCart;
+    this.fetchProducts();
+  }
+
+  fetchProducts() {
+    this.products = [
+      new Product(
+        "IPhone 17 Pro Max",
+        "something",
+        "This is a Phone for you",
+        899.99,
+      ),
+      new Product(
+        "MacBook Pro 14inch M5(Apple Silicon)",
+        "something",
+        "The Best labtop in the world!",
+        1398.76,
+      ),
+    ];
+    this.renderProducts();
+  }
+
+  renderProducts() {
+    for (const product of this.products)
+      new ProductItem("product-list-id", product, this.shoppingCart);
   }
 
   render() {
     this.createRootElement("ul", "product-list", [
       new ElementAttribute("id", "product-list-id"),
     ]);
-    for (const product of this.products)
-      new ProductItem("product-list-id", product, this.shoppingCart);
+    if (this.products && this.products.length > 0) this.renderProducts();
   }
 }
 
