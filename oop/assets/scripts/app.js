@@ -22,7 +22,10 @@ class ElementAttribute {
 class Component {
   constructor(renderHookId) {
     this.renderHookId = renderHookId;
+    this.render();
   }
+
+  render() {}
 
   createRootElement(tagName = "", className = "", attributes = []) {
     let element = document.createElement("div");
@@ -118,11 +121,6 @@ class ProductItem extends Component {
 }
 
 class ProductList extends Component {
-  constructor(renderHookId, shoppingCart) {
-    super(renderHookId);
-    this.shoppingCart = shoppingCart;
-  }
-
   products = [
     new Product(
       "IPhone 17 Pro Max",
@@ -138,12 +136,17 @@ class ProductList extends Component {
     ),
   ];
 
+  constructor(renderHookId, shoppingCart) {
+    super(renderHookId);
+    this.shoppingCart = shoppingCart;
+  }
+
   render() {
     this.createRootElement("ul", "product-list", [
       new ElementAttribute("id", "product-list-id"),
     ]);
     for (const product of this.products)
-      new ProductItem("product-list-id", product, this.shoppingCart).render();
+      new ProductItem("product-list-id", product, this.shoppingCart);
   }
 }
 
@@ -155,14 +158,14 @@ class Shop {
 
   render() {
     // this.renderHook.append(this.shoppingCart.render());
-    this.shoppingCart.render();
+    // this.shoppingCart;
     //this.renderHook.append(this.productList.render());
-    this.productList.render();
+    // this.productList;
   }
 
   reRender() {
     this.renderHook.innerHTML = "";
-    this.render();
+    // this.render();
   }
 }
 
@@ -176,7 +179,7 @@ class App {
   static init() {
     const shop = new Shop();
     this.cart = shop.shoppingCart;
-    shop.render();
+    // shop.render();
   }
 
   static addProduct(product) {
