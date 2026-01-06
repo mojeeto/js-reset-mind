@@ -151,16 +151,17 @@ class ProductItem extends Component {
 }
 
 class ProductList extends Component {
-  products = [];
+  #products = [];
 
   constructor(renderHookId, shoppingCart) {
-    super(renderHookId);
+    super(renderHookId, false);
     this.shoppingCart = shoppingCart;
-    this.fetchProducts();
+    this.render();
+    this.#fetchProducts();
   }
 
-  fetchProducts() {
-    this.products = [
+  #fetchProducts() {
+    this.#products = [
       new Product(
         "IPhone 17 Pro Max",
         "something",
@@ -178,7 +179,7 @@ class ProductList extends Component {
   }
 
   renderProducts() {
-    for (const product of this.products)
+    for (const product of this.#products)
       new ProductItem("product-list-id", product, this.shoppingCart);
   }
 
