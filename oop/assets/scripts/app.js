@@ -61,8 +61,15 @@ class ShoppingCart extends Component {
   }
 
   constructor(renderHookId, shopInstance) {
-    super(renderHookId);
+    super(renderHookId, false);
+    // make parent call render method cancel
+    // and call it manual by subclass for renderNowHandler property
     this.shopInstance = shopInstance;
+    this.orderNowHandler = () => {
+      console.log("Ordering...");
+      console.log(this.items);
+    };
+    this.render();
   }
 
   addProduct(product) {
@@ -72,12 +79,34 @@ class ShoppingCart extends Component {
     //this.shopInstance.reRender();
   }
 
+  // orderNowHandler() {
+  //  console.log("ordering...");
+  //  console.log(this.items);
+  //}
+
+  // because of super keyword fields and properties will define and
+  // initialize after parent constructor finished
+  // so for this situation we can make it in constructor
+  // just for this example
+  // orderNowHandler = () => {
+  //  console.log("ordering...");
+  //  console.log(this.items);
+  //};
+
   render() {
     // const sectionElement = document.createElement('section');
     const sectionElement = this.createRootElement("section", "cart");
     sectionElement.innerHTML = `
         <h2>Total: \$${0}</h2>
         <button>Order Now!</button> `;
+    const orderNowBtn = sectionElement.querySelector("button");
+    // using bind()
+    //orderNowBtn.addEventListener("click", this.orderNowHandler.bind(this));
+    // using Arrow Function in eventHandler
+    // orderNowBtn.addEventListener("click", () => this.orderNowHandler());
+    // using Arrow Function as Handler
+    orderNowBtn.addEventListener("click", this.orderNowHandler);
+
     //sectionElement.classList.add("cart");
     // use query selector for live changable and get the first h2 tag
     this.totalOutputHTML = sectionElement.querySelector("h2");
