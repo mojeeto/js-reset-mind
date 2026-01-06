@@ -43,9 +43,8 @@ const renderMovie = (filterTitlePattern = null) => {
     // apply method is also like the call method but it's accept thisArg and list of arguments
     // that we want to pass to function
 
-    for (const key in movie.info)
-      if (key !== "title" && key !== "_title")
-        text += `${key}: ${movie.info[key]}`;
+    // if (key !== "title" && key !== "_title")
+    for (const key in movie.info) text += `${key}: ${movie.info[key]}`;
     newElement.textContent = text;
     moviesList.appendChild(newElement);
   });
@@ -64,6 +63,7 @@ const addMovieBtnHandler = () => {
   const newMovie = {
     id: ++COUNTER.id,
     info: {
+      _title: "",
       set title(newValue) {
         if (newValue.trim() === "") {
           this._title = "DEFAULT";
@@ -82,6 +82,20 @@ const addMovieBtnHandler = () => {
       return this.info.title.toUpperCase();
     },
   };
+
+  // configure title for not enumerable
+  const titleDescriptor = Object.getOwnPropertyDescriptors(newMovie.info).title;
+  titleDescriptor.enumerable = false;
+  Object.defineProperty(newMovie.info, "title", {
+    ...titleDescriptor,
+    enumerable: false,
+  });
+  Object.defineProperty(newMovie.info, "_title", {
+    enumerable: false,
+    configurable: true,
+    writable: true,
+    value: newMovie.info._title,
+  });
 
   // set title
   newMovie.info.title = title;
