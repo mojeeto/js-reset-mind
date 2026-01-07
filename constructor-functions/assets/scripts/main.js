@@ -12,7 +12,6 @@ class Person {
     );
   }
 }
-*/
 
 function Person() {
   this.name = "Mojtaba";
@@ -46,7 +45,6 @@ Person(class).prototype(property, that added by default) = {
 `);
 
 // as we learn the this keyword refer to which object that created base on class call the method
-/*
 Person.prototype = {
   customProperty: "Something",
   tellMeYourAge() {
@@ -55,7 +53,6 @@ Person.prototype = {
     );
   },
 };
-*/
 
 // best practice to add to prototype property
 
@@ -88,3 +85,38 @@ console.log(
   "const person3 = new person2.__proto__.constructor() ==> ",
   person3,
 );
+
+*/
+
+class Human {
+  walk() {
+    console.log("Walking");
+  }
+}
+
+class Person extends Human {
+  name = "Mojtaba";
+
+  constructor(name = null) {
+    super();
+    if (name) this.name = name;
+    this.age = 24;
+  }
+
+  // if we create the method like greet method it's create method once on prototype and save memory and performance for our objects
+  // but if we create anonymouse function (methods) like arrow function something like that with create property with assigned anonymouse function, it's create that anonymouse function method for all object that created based on class
+  // but it's not cost very big performance and memory it's depends on application that we make
+  greet() {
+    console.log(`Hello, My name is ${this.name} and my age is ${this.age}.`);
+  }
+}
+
+const p = new Person();
+const p2 = new Person("Ali");
+
+console.log(p, p2);
+console.log(Person);
+
+console.log(p.__proto__);
+console.log(p2.__proto__);
+console.log(p.__proto__ === p2.__proto__);
