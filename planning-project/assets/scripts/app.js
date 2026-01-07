@@ -1,6 +1,18 @@
 class ProjectItem {
   constructor(id) {
     this.id = id;
+    this.connectMoreButton();
+    this.connectSwitchButton();
+  }
+
+  connectMoreButton() {
+    this.moreButton = document
+      .getElementById(this.id)
+      .querySelector("button.alt");
+  }
+
+  connectSwitchButton() {
+    this.switchButton = this.moreButton.nextElementSibling;
   }
 }
 
