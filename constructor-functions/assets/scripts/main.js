@@ -88,6 +88,7 @@ console.log(
 
 */
 
+/*
 class Human {
   walk() {
     console.log("Walking");
@@ -120,3 +121,38 @@ console.log(Person);
 console.log(p.__proto__);
 console.log(p2.__proto__);
 console.log(p.__proto__ === p2.__proto__);
+*/
+
+const person = {
+  name: "Mojtaba",
+  age: 24,
+};
+
+// best practice to working with prototypes beside using __proto__
+console.log(Object.getPrototypeOf(person));
+// setting prototype
+Object.setPrototypeOf(person, {
+  // because we use objects here again the prototype of Object function constructor will append to this object again and we don't have to add the like below
+  // ...Object.getPrototypeOf(person),
+  greet() {
+    console.log(`Hello, My name is ${this.name}, i'm ${this.age} years old.`);
+  },
+});
+
+console.log(person);
+
+person.greet();
+
+// this line create a empty object with custom prototype
+// const student = Object.create({ object for prototype });
+// also the create function can take second argument for property
+// const student = Object.create({ object for prototype }, { name: ... });
+// we can pass the configuration to the property name
+// const student = Object.create({ object for prototype }, { name:
+// {
+//  configuration: true,
+//  writable: true,
+//  enumreable: true,
+//  value: 'something'
+// }
+// });
