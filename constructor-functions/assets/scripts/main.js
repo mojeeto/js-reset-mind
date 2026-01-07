@@ -24,5 +24,9 @@ function Person() {
   };
 }
 
+// it's create an object from function because of new keyword
 const person = new Person();
 person.greet();
+console.log(Person);
+console.log(typeof person);
+console.log(person instanceof Person);
