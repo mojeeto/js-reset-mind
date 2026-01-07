@@ -46,6 +46,7 @@ Person(class).prototype(property, that added by default) = {
 `);
 
 // as we learn the this keyword refer to which object that created base on class call the method
+/*
 Person.prototype = {
   customProperty: "Something",
   tellMeYourAge() {
@@ -53,6 +54,16 @@ Person.prototype = {
       `The custom property: ${this.customProperty}\nThe Age: ${this.age}`,
     );
   },
+};
+*/
+
+// best practice to add to prototype property
+
+Person.prototype.customProperty = "Something";
+Person.prototype.tellMeYourAge = function () {
+  console.log(
+    `The custom property: ${this.customProperty}\nThe Age: ${this.age}`,
+  );
 };
 
 const person2 = new Person();
@@ -69,3 +80,11 @@ console.log(
 console.log(person2);
 
 person2.tellMeYourAge();
+
+// if we have not access to the original of object that we have, we can use the constructor propery on that __proto__ object
+
+const person3 = new person2.__proto__.constructor();
+console.log(
+  "const person3 = new person2.__proto__.constructor() ==> ",
+  person3,
+);
