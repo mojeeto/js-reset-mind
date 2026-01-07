@@ -1,18 +1,24 @@
 class ProjectItem {
-  constructor(id) {
+  constructor(id, projectListInstance) {
     this.id = id;
+    this.projectListInstance = projectListInstance;
     this.connectMoreButton();
     this.connectSwitchButton();
   }
 
-  connectMoreButton() {
-    this.moreButton = document
-      .getElementById(this.id)
-      .querySelector("button.alt");
-  }
+  connectMoreButton() {}
 
   connectSwitchButton() {
-    this.switchButton = this.moreButton.nextElementSibling;
+    const switchButton = document
+      .getElementById(this.id)
+      .querySelector("button:last-of-type");
+    switchButton.addEventListener(
+      "click",
+      this.projectListInstance.switchProject.bind(
+        this.projectListInstance,
+        this.id,
+      ),
+    );
   }
 }
 
@@ -21,10 +27,17 @@ class ProjectList {
 
   constructor(type) {
     const projects = document.querySelectorAll(`#${type}-projects li`);
-    for (const project of projects) {
-      this.#projects.push(new ProjectItem(project.id));
-    }
-    console.log(this.#projects);
+    for (const project of projects)
+      this.#projects.push(new ProjectItem(project.id, this));
+  }
+
+  addProject(projectId) {}
+
+  switchProject(projectId) {
+    // get index of project id
+    const targetIndex = this.#projects.findIndex(({ id }) => id === projectId);
+    const deletedProject = this.#projects[targetIndex];
+    this.#projects.splice(targetIndex, 1);
   }
 }
 
