@@ -57,7 +57,7 @@ class ProjectItem {
   }
 
   connectSwitchButton() {
-    this.projectItemElement = DOMHelper.clearEvents(this.projectItemElement);
+    // this.projectItemElement = DOMHelper.clearEvents(this.projectItemElement);
     const switchBtn = this.projectItemElement.querySelector(
       "button:last-of-type",
     );
@@ -69,6 +69,7 @@ class ProjectItem {
         this.projectListInstance,
         this.id,
       ),
+      { once: true },
     );
   }
 
