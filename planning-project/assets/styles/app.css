@@ -92,6 +92,10 @@ button:active {
   background: white;
 }
 
+.card span:last-of-type:hover {
+  cursor: pointer;
+}
+
 #active-projects {
   border: 1px solid #870099;
 }
@@ -125,4 +129,3 @@ button:active {
   color: white;
   margin: 0;
 }
-

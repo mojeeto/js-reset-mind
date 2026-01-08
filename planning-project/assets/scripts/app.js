@@ -63,9 +63,14 @@ class Tooltip extends Component {
     //console.log(this.projectItemInstance.projectItemElement.dataset.extraInfo);
     this.division = document.createElement("div");
     this.division.classList = "card";
-    this.division.textContent =
+    this.division.style.display = "flex";
+    this.division.style.justifyContent = "space-between";
+    const content =
       this.projectItemInstance.projectItemElement.dataset.extraInfo;
-    this.division.addEventListener("click", this.detach.bind(this));
+    this.division.innerHTML = `<span>${content}</span><span>x</span>`;
+    this.division
+      .querySelector(`span:last-of-type`)
+      .addEventListener("click", this.detach.bind(this));
     //document.body.appendChild(this.division);
     //this.projectItemInstance.hasActiveTooltip = true;
   }
