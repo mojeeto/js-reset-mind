@@ -54,9 +54,16 @@ class Tooltip extends Component {
   }
 
   create() {
+    // we can use the data- attribute in html via javascript with dataset property in object of
+    // html element here
+    // also we can set new data-attribute for element with just:
+    // document.getElementById('someId').dataset.newKeyWord = 'value'; ==> refactor that key in html to: data-new-key-word='value'
+    // set new data attribute
+    //this.projectItemInstance.projectItemElement.dataset.someKey = 'Value';
+    //console.log(this.projectItemInstance.projectItemElement.dataset.extraInfo);
     this.division = document.createElement("div");
     this.division.classList = "card";
-    this.division.textContent = "Hello, world!";
+    this.division.textContent = this.projectItemInstance.projectItemElement.dataset.extraInfo;
     this.division.addEventListener("click", this.detach.bind(this));
     //document.body.appendChild(this.division);
     //this.projectItemInstance.hasActiveTooltip = true;
