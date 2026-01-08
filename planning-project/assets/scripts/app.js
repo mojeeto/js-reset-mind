@@ -13,8 +13,13 @@ class DOMHelper {
 }
 
 class Tooltip {
+  constructor(projectItemInstance) {
+    this.projectItemInstance = projectItemInstance;
+  }
+
   detach() {
     this.division.remove();
+    this.projectItemInstance.hasActiveTooltip = false;
   }
 
   attach() {
@@ -23,10 +28,13 @@ class Tooltip {
     this.division.textContent = "Hello, world!";
     this.division.addEventListener("click", this.detach.bind(this));
     document.body.appendChild(this.division);
+    this.projectItemInstance.hasActiveTooltip = true;
   }
 }
 
 class ProjectItem {
+  hasActiveTooltip = false;
+
   constructor(id, projectListInstance) {
     this.id = id;
     this.projectListInstance = projectListInstance;
@@ -36,7 +44,8 @@ class ProjectItem {
   }
 
   showMoreInfoHandler() {
-    const tooltip = new Tooltip();
+    if (this.hasActiveTooltip) return;
+    const tooltip = new Tooltip(this);
     tooltip.attach();
   }
 
