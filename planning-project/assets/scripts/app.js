@@ -47,7 +47,7 @@ class Component {
 
 class Tooltip extends Component {
   constructor(projectItemInstance) {
-    super();
+    super(projectItemInstance.id);
     // super("active-projects", true);
     this.projectItemInstance = projectItemInstance;
     this.create();
@@ -63,7 +63,8 @@ class Tooltip extends Component {
     //console.log(this.projectItemInstance.projectItemElement.dataset.extraInfo);
     this.division = document.createElement("div");
     this.division.classList = "card";
-    this.division.textContent = this.projectItemInstance.projectItemElement.dataset.extraInfo;
+    this.division.textContent =
+      this.projectItemInstance.projectItemElement.dataset.extraInfo;
     this.division.addEventListener("click", this.detach.bind(this));
     //document.body.appendChild(this.division);
     //this.projectItemInstance.hasActiveTooltip = true;
