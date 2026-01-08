@@ -12,25 +12,49 @@ class DOMHelper {
   }
 }
 
+class Tooltip {
+  detach() {
+    this.division.remove();
+  }
+
+  attach() {
+    this.division = document.createElement("div");
+    this.division.classList = "card";
+    this.division.textContent = "Hello, world!";
+    this.division.addEventListener("click", this.detach.bind(this));
+    document.body.appendChild(this.division);
+  }
+}
+
 class ProjectItem {
   constructor(id, projectListInstance) {
     this.id = id;
     this.projectListInstance = projectListInstance;
-    this.connectMoreButton();
+    this.projectItemElement = document.getElementById(this.id);
     this.connectSwitchButton();
+    this.connectMoreButton();
   }
 
-  connectMoreButton() {}
+  showMoreInfoHandler() {
+    const tooltip = new Tooltip();
+    tooltip.attach();
+  }
+
+  connectMoreButton() {
+    const moreInfoBtn = this.projectItemElement.querySelector(
+      "button:first-of-type",
+    );
+    moreInfoBtn.addEventListener("click", this.showMoreInfoHandler.bind(this));
+  }
 
   connectSwitchButton() {
-    let projectItemElement = document.getElementById(this.id);
-    projectItemElement = DOMHelper.clearEvents(projectItemElement);
-    const switchButton = projectItemElement.querySelector(
+    this.projectItemElement = DOMHelper.clearEvents(this.projectItemElement);
+    const switchBtn = this.projectItemElement.querySelector(
       "button:last-of-type",
     );
-    switchButton.textContent =
+    switchBtn.textContent =
       this.projectListInstance.listType === "active" ? "Active" : "Finish";
-    switchButton.addEventListener(
+    switchBtn.addEventListener(
       "click",
       this.projectListInstance.switchProject.bind(
         this.projectListInstance,
