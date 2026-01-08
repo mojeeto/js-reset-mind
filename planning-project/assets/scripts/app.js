@@ -46,10 +46,12 @@ class Component {
 }
 
 class Tooltip extends Component {
+  projectItemElement = null;
   constructor(projectItemInstance) {
     super(projectItemInstance.id);
     // super("active-projects", true);
     this.projectItemInstance = projectItemInstance;
+    this.projectItemElement = projectItemInstance.projectItemElement;
     this.create();
   }
 
@@ -63,14 +65,26 @@ class Tooltip extends Component {
     //console.log(this.projectItemInstance.projectItemElement.dataset.extraInfo);
     this.division = document.createElement("div");
     this.division.classList = "card";
+    /*
     this.division.style.display = "flex";
     this.division.style.justifyContent = "space-between";
     const content =
       this.projectItemInstance.projectItemElement.dataset.extraInfo;
     this.division.innerHTML = `<span>${content}</span><span>x</span>`;
-    this.division
-      .querySelector(`span:last-of-type`)
-      .addEventListener("click", this.detach.bind(this));
+     */
+    this.division.textContent = this.projectItemElement.dataset.extraInfo;
+
+    // lets add position for this tooltip
+    const { offsetTop, offsetLeft, clientHeight } = this.projectItemElement;
+    const { scrollTop } = this.projectItemElement.parentElement;
+    this.division.style.position = "absolute";
+    // this.division.style.top = offsetTop + 16 + "px";
+    const positionX = offsetLeft + 10;
+    const positionY = offsetTop + clientHeight - scrollTop - 10;
+    this.division.style.top = positionY + "px";
+    this.division.style.left = positionX + "px";
+
+    this.division.addEventListener("click", this.detach.bind(this));
     //document.body.appendChild(this.division);
     //this.projectItemInstance.hasActiveTooltip = true;
   }
