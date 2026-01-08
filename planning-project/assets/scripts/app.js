@@ -1,3 +1,10 @@
+class DOMHelper {
+  static moveElement(elementId, destinationElement) {
+    const element = document.getElementById(elementId);
+    document.querySelector(destinationElement).appendChild(element);
+  }
+}
+
 class ProjectItem {
   constructor(id, projectListInstance) {
     this.id = id;
@@ -39,7 +46,7 @@ class ProjectList {
   }
 
   addProject(projectId) {
-    console.log(projectId, this);
+    DOMHelper.moveElement(projectId, `#${this.#listType}-projects ul`);
   }
 
   switchProject(projectId) {
