@@ -1,4 +1,11 @@
 class DOMHelper {
+  static clearEvents(element) {
+    if (!(element instanceof HTMLElement)) return;
+    const cloneElement = element.cloneNode(true);
+    element.replaceWith(cloneElement);
+    return cloneElement;
+  }
+
   static moveElement(elementId, destinationElement) {
     const element = document.getElementById(elementId);
     document.querySelector(destinationElement).appendChild(element);
@@ -16,9 +23,13 @@ class ProjectItem {
   connectMoreButton() {}
 
   connectSwitchButton() {
-    const switchButton = document
-      .getElementById(this.id)
-      .querySelector("button:last-of-type");
+    let projectItemElement = document.getElementById(this.id);
+    projectItemElement = DOMHelper.clearEvents(projectItemElement);
+    const switchButton = projectItemElement.querySelector(
+      "button:last-of-type",
+    );
+    switchButton.textContent =
+      this.projectListInstance.listType === "active" ? "Active" : "Finish";
     switchButton.addEventListener(
       "click",
       this.projectListInstance.switchProject.bind(
@@ -27,15 +38,20 @@ class ProjectItem {
       ),
     );
   }
+
+  update(changedInstance) {
+    this.projectListInstance = changedInstance;
+    this.connectSwitchButton();
+  }
 }
 
 class ProjectList {
   #projects = [];
-  #listType = null;
+  listType = null;
   #switchHandler = null;
 
   constructor(type) {
-    this.#listType = type;
+    this.listType = type;
     const projects = document.querySelectorAll(`#${type}-projects li`);
     for (const project of projects)
       this.#projects.push(new ProjectItem(project.id, this));
@@ -45,15 +61,17 @@ class ProjectList {
     this.#switchHandler = callback;
   }
 
-  addProject(projectId) {
-    DOMHelper.moveElement(projectId, `#${this.#listType}-projects ul`);
+  addProject(project) {
+    this.#projects.push(project);
+    DOMHelper.moveElement(project.id, `#${this.listType}-projects ul`);
+    project.update(this);
   }
 
   switchProject(projectId) {
     // get index of project id
     const targetIndex = this.#projects.findIndex(({ id }) => id === projectId);
     const deletedProject = this.#projects[targetIndex];
-    this.#switchHandler(deletedProject.id);
+    this.#switchHandler(deletedProject);
     this.#projects.splice(targetIndex, 1);
   }
 }
