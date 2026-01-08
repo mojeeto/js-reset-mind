@@ -12,23 +12,54 @@ class DOMHelper {
   }
 }
 
-class Tooltip {
-  constructor(projectItemInstance) {
-    this.projectItemInstance = projectItemInstance;
+class Component {
+  constructor(parentElementId = null, insertAfter = false) {
+    this.parentElement = parentElementId
+      ? document.getElementById(parentElementId)
+      : document.body;
+    this.insertAfter = insertAfter;
   }
 
   detach() {
-    this.division.remove();
-    this.projectItemInstance.hasActiveTooltip = false;
+    if (this.division && this.division instanceof HTMLElement)
+      this.division.remove();
+    if (
+      this.projectItemInstance &&
+      this.projectItemInstance instanceof ProjectItem
+    )
+      this.projectItemInstance.hasActiveTooltip = false;
   }
 
   attach() {
+    if (
+      (!this.division && !(this.division instanceof HTMLElement)) ||
+      (!this.projectItemInstance &&
+        !(this.projectItemInstance instanceof ProjectItem))
+    )
+      return;
+    this.parentElement.insertAdjacentElement(
+      this.insertAfter ? "afterbegin" : "beforeend",
+      this.division,
+    );
+    this.projectItemInstance.hasActiveTooltip = true;
+  }
+}
+
+class Tooltip extends Component {
+  constructor(projectItemInstance) {
+    super();
+    // super("active-projects", true);
+    this.projectItemInstance = projectItemInstance;
+    this.create();
+  }
+
+  create() {
     this.division = document.createElement("div");
     this.division.classList = "card";
     this.division.textContent = "Hello, world!";
     this.division.addEventListener("click", this.detach.bind(this));
-    document.body.appendChild(this.division);
-    this.projectItemInstance.hasActiveTooltip = true;
+    //document.body.appendChild(this.division);
+    //this.projectItemInstance.hasActiveTooltip = true;
   }
 }
 
