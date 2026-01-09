@@ -107,7 +107,7 @@ class ProjectItem {
   }
 
   showMoreInfoHandler() {
-    App.analytics();
+    // App.analytics();
     if (this.hasActiveTooltip) return;
     const tooltip = new Tooltip(this);
     tooltip.attach();
@@ -188,6 +188,10 @@ class App {
     finishedProjects.setSwitchHandler(
       activeProjects.addProject.bind(activeProjects),
     );
+
+    const timerID = setTimeout(this.analytics, 3000);
+    console.log(timerID);
+    // we can stop the timer with id with clearTimeout(timerID);
   }
 
   static analytics() {
