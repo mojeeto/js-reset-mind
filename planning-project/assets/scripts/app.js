@@ -73,7 +73,11 @@ class Tooltip extends Component {
       this.projectItemInstance.projectItemElement.dataset.extraInfo;
     this.division.innerHTML = `<span>${content}</span><span>x</span>`;
      */
-    this.division.textContent = this.projectItemElement.dataset.extraInfo;
+    const projectExtraInfo = this.projectItemElement.dataset.extraInfo;
+    const tooltipTemplate = document.getElementById("tooltip-template");
+    const tooltipBody = document.importNode(tooltipTemplate.content, true);
+    tooltipBody.querySelector("p").textContent = projectExtraInfo;
+    this.division.append(tooltipBody);
 
     // lets add position for this tooltip
     const { offsetTop, offsetLeft, clientHeight } = this.projectItemElement;
