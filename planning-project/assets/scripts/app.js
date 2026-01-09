@@ -107,6 +107,7 @@ class ProjectItem {
   }
 
   showMoreInfoHandler() {
+    App.analytics();
     if (this.hasActiveTooltip) return;
     const tooltip = new Tooltip(this);
     tooltip.attach();
@@ -117,6 +118,7 @@ class ProjectItem {
       "button:first-of-type",
     );
     moreInfoBtn.addEventListener("click", this.showMoreInfoHandler.bind(this));
+    // just for learning Dynamic Add JavaScript Code
   }
 
   connectSwitchButton() {
@@ -174,6 +176,8 @@ class ProjectList {
 }
 
 class App {
+  static analyticState = "Not-Active";
+
   static init() {
     const activeProjects = new ProjectList("active");
     const finishedProjects = new ProjectList("finished");
@@ -184,6 +188,15 @@ class App {
     finishedProjects.setSwitchHandler(
       activeProjects.addProject.bind(activeProjects),
     );
+  }
+
+  static analytics() {
+    if (this.analyticState === "Active") return;
+    const analyticScript = document.createElement("script");
+    analyticScript.src = "assets/scripts/analytics.js";
+    analyticScript.defer = true;
+    document.head.append(analyticScript);
+    this.analyticState = "Active";
   }
 }
 
