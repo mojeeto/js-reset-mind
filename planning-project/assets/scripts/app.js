@@ -9,6 +9,7 @@ class DOMHelper {
   static moveElement(elementId, destinationElement) {
     const element = document.getElementById(elementId);
     document.querySelector(destinationElement).appendChild(element);
+    element.scrollIntoView({ behavior: "smooth" });
   }
 }
 
