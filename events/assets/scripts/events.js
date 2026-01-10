@@ -36,6 +36,9 @@ div.addEventListener(
 );
 
 button.addEventListener("click", someFunction);
+button.addEventListener("click", () => {
+  console.log("Other Click");
+});
 
 /* 
 setTimeout(() => {
