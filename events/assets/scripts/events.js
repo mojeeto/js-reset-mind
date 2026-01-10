@@ -7,7 +7,9 @@ button.onclick = () => {
 };
 */
 
-function someFunction() {
+function someFunction(event) {
+  event.target.disabled = true;
+  event.target.style.backgroundColor = "gray";
   console.log("Some Function Event");
 }
 
