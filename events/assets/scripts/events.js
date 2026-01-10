@@ -13,6 +13,10 @@ function someFunction(event) {
   event.target.disabled = true;
   event.target.style.backgroundColor = "gray";
   */
+  // bubbling and capturing is disabled
+  event.stopPropagation();
+  // stop other listener for this button throwed
+  event.stopImmediatePropagation();
   console.log("Some Function Event");
 }
 
@@ -28,7 +32,7 @@ div.addEventListener(
   // the true value in the third argument of method is for when child of this element
   // triggered for click event then this going to run first then the child
   // it's enable capturing feature and disable bubbling feature
-  true,
+  // true,
 );
 
 button.addEventListener("click", someFunction);
