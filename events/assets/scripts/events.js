@@ -20,3 +20,9 @@ button.addEventListener("click", someFunction);
 setTimeout(() => {
   button.removeEventListener("click", someFunction);
 }, 2000);
+
+const form = document.querySelector("form");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  console.log(this, event);
+});
