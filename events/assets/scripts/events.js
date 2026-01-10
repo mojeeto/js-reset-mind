@@ -20,10 +20,18 @@ function someFunction(event) {
 
 // after click on button the div event listener also runs
 // because of bubbling feature in js
+div.addEventListener(
+  "click",
+  () => {
+    console.log("Hello, Im Dive");
+  },
+  // the true value in the third argument of method is for when child of this element
+  // triggered for click event then this going to run first then the child
+  // it's enable capturing feature and disable bubbling feature
+  true,
+);
+
 button.addEventListener("click", someFunction);
-div.addEventListener("click", () => {
-  console.log("Hello, Im Dive");
-});
 
 /* 
 setTimeout(() => {
