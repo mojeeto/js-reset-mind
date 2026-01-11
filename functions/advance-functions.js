@@ -35,9 +35,15 @@ console.log(
   anotherSumFunction(5, 10),
 );
 
+// all function in javascript is closures because every function accept all enviroments
+// surrender it and it dont throw away that enviroments also if it's not use
+let multiplier = 50;
+
 // factory function can save time and clear code
 function createTaxCalculator(tax) {
+  let multiplier = 10000;
   function calculateTax(amount) {
+    console.log(multiplier);
     return amount * tax;
   }
   return calculateTax;
@@ -46,7 +52,9 @@ function createTaxCalculator(tax) {
 const calculateVatAmount = createTaxCalculator(0.19);
 const calculateIncomeTaxAmount = createTaxCalculator(0.25);
 
+multiplier = 100;
+
 // in this line idont need to re-write the tax again
 // if i want to write it more than one time
 console.log(calculateVatAmount(100));
-console.log(calculateIncomeTaxAmount(200));
+console.log(calculateVatAmount(200));
