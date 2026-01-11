@@ -34,3 +34,19 @@ console.log(
   anotherSumFunction,
   anotherSumFunction(5, 10),
 );
+
+// factory function can save time and clear code
+function createTaxCalculator(tax) {
+  function calculateTax(amount) {
+    return amount * tax;
+  }
+  return calculateTax;
+}
+
+const calculateVatAmount = createTaxCalculator(0.19);
+const calculateIncomeTaxAmount = createTaxCalculator(0.25);
+
+// in this line idont need to re-write the tax again
+// if i want to write it more than one time
+console.log(calculateVatAmount(100));
+console.log(calculateIncomeTaxAmount(200));
