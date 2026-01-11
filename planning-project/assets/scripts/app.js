@@ -105,6 +105,7 @@ class ProjectItem {
     this.projectItemElement = document.getElementById(this.id);
     this.connectSwitchButton();
     this.connectMoreButton();
+    this.connectDrag();
   }
 
   showMoreInfoHandler() {
@@ -162,6 +163,43 @@ class ProjectList {
     const projects = document.querySelectorAll(`#${type}-projects li`);
     for (const project of projects)
       this.#projects.push(new ProjectItem(project.id, this));
+    this.connectDraggable();
+  }
+
+  connectDraggable() {
+    const itemsList = document.querySelector(`#${this.listType}-projects ul`);
+
+    itemsList.addEventListener("dragenter", (e) => {
+      if (e.dataTransfer.types[0] !== "text/plain") return;
+      itemsList.classList.add("droppable");
+      e.preventDefault();
+    });
+
+    itemsList.addEventListener("dragover", (e) => {
+      if (e.dataTransfer.types[0] !== "text/plain") return;
+      e.preventDefault();
+    });
+
+    itemsList.addEventListener("dragleave", (e) => {
+      if (
+        !e.relatedTarget ||
+        e.relatedTarget.closest(`#${this.listType}-projects ul`) === itemsList
+      )
+        return;
+      itemsList.classList.remove("droppable");
+    });
+
+    itemsList.addEventListener("drop", (event) => {
+      const projectId = event.dataTransfer.getData("text/plain");
+      // it's check if the project that dropped on that own list
+      // the list it's dragged
+      if (this.#projects.find((project) => project.id === projectId)) return;
+      document
+        .getElementById(projectId)
+        .querySelector("button:last-of-type")
+        .click();
+      itemsList.classList.remove("droppable");
+    });
   }
 
   setSwitchHandler(callback) {
