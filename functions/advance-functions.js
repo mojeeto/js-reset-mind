@@ -70,3 +70,40 @@ const powerOf = (x, n) => (n === 1 ? x : x * powerOf(x, --n));
 console.log("Recursion function", powerOf);
 console.log("The result of 2 power 3 times:", powerOf(2, 3));
 console.log("The result of 5 power 3 times:", powerOf(5, 3));
+
+const myself = {
+  name: "Mojtaba",
+  friends: [
+    {
+      name: "Sajjad",
+      friends: [
+        {
+          name: "Nima",
+          friends: [
+            {
+              name: "Mojtaba Salehi",
+            },
+            { name: "Mohammad" },
+          ],
+        },
+      ],
+    },
+    {
+      name: "Amir Mohammad",
+    },
+  ],
+};
+
+function printFriendsName(person) {
+  const collectedNames = [];
+
+  if (!person.friends) return [];
+
+  for (const friend of person.friends) {
+    collectedNames.push(friend.name);
+    collectedNames.push(...printFriendsName(friend));
+  }
+  return collectedNames;
+}
+
+console.log(printFriendsName(myself));
