@@ -92,6 +92,7 @@ class Tooltip extends Component {
     this.division.addEventListener("click", this.detach.bind(this));
     //document.body.appendChild(this.division);
     //this.projectItemInstance.hasActiveTooltip = true;
+    this.connectDrag();
   }
 }
 
@@ -111,6 +112,13 @@ class ProjectItem {
     if (this.hasActiveTooltip) return;
     const tooltip = new Tooltip(this);
     tooltip.attach();
+  }
+
+  connectDrag() {
+    this.projectItemElement.addEventListener("dragstart", (event) => {
+      event.dataTransfer.setData("text/plain", this.id);
+      event.dataTransfer.effectAllowed = "move";
+    });
   }
 
   connectMoreButton() {
@@ -189,8 +197,7 @@ class App {
       activeProjects.addProject.bind(activeProjects),
     );
 
-    const timerID = setTimeout(this.analytics, 3000);
-    console.log(timerID);
+    // const timerID = setTimeout(this.analytics, 3000);
     // we can stop the timer with id with clearTimeout(timerID);
   }
 
