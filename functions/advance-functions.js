@@ -107,3 +107,18 @@ function printFriendsName(person) {
 }
 
 console.log(printFriendsName(myself));
+
+// 0, 1, (0+1) = 1, (1+1) = 2, (1,2) = 3, (2,3) = 5, (3,5) = 8, ...
+function fib(step) {
+  if (step === 0) return 0;
+  if (step === 1) return 1;
+  return fib(step - 1) + fib(step - 2);
+}
+
+function stringFib(step) {
+  const collectionFeb = [];
+  for (let i = 0; i < step; i++) collectionFeb.push(fib(i));
+  console.log(...collectionFeb);
+}
+
+stringFib(10);
