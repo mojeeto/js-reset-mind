@@ -58,3 +58,15 @@ multiplier = 100;
 // if i want to write it more than one time
 console.log(calculateVatAmount(100));
 console.log(calculateVatAmount(200));
+
+// recursion function
+
+//function powerOf(x, n) {
+// if (n === 1) return x;
+// return x * powerOf(x, --n);
+//}
+const powerOf = (x, n) => (n === 1 ? x : x * powerOf(x, --n));
+
+console.log("Recursion function", powerOf);
+console.log("The result of 2 power 3 times:", powerOf(2, 3));
+console.log("The result of 5 power 3 times:", powerOf(5, 3));
