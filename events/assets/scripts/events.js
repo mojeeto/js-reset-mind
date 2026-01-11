@@ -51,3 +51,27 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
   console.log(this, event);
 });
+
+const lis = document.querySelectorAll("li");
+const listItems = document.querySelector("ul");
+// the line below it's not good for add listener
+// it's better to use ul instead and use bubbling and capturing feature
+/*lis.forEach((li) => {
+  li.addEventListener("click", ({ target }) => {
+    target.classList.toggle("highlight");
+  });
+});*/
+
+listItems.addEventListener("click", ({ currentTarget, target }) => {
+  // the currentTarget always refer to ul
+  // and the target always refer to which element in ul i clicked
+  // it's can be free space of ul that refer to ul
+  // or tag h2 element that refer to h2 element or p tag and more
+  console.log("Which element that have listener:", currentTarget);
+  console.log("Which element that i clicked on listener:", target);
+
+  // it's good if we don't have tag h2 or some other tags on this element as child
+  // otherwise it's better to use closest('li') to refer to li tag and toggle the class
+  //target.classList.toggle("highlight");
+  target.closest("li").classList.toggle("highlight");
+});
