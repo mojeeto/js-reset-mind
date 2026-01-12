@@ -37,3 +37,7 @@ const productPrice = 29.99;
 const prodDesc = productDescription`This is a productName ${productName} and this is a product price ${productPrice}.`;
 
 console.log(prodDesc);
+
+const regex = /^\S+@\S+\.\S+$/;
+
+console.log(regex.test("example@email.com"));
