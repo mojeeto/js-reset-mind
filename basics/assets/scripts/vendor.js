@@ -17,3 +17,5 @@ console.log("Max Safe Integer(2^53)-1:", Number.MAX_SAFE_INTEGER);
 console.log("Max Min Safe Integer(2^53)-1:", Number.MIN_SAFE_INTEGER);
 console.log("Max Max Value:", Number.MAX_VALUE);
 console.log("Max Min Value:", Number.MIN_VALUE);
+
+console.log("BigInt:", 8972163549875632897146328n);
