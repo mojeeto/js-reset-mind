@@ -19,3 +19,9 @@ console.log("Max Max Value:", Number.MAX_VALUE);
 console.log("Max Min Value:", Number.MIN_VALUE);
 
 console.log("BigInt:", 8972163549875632897146328n);
+
+function RandomIntNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+console.log(RandomIntNumber(5, 50));
