@@ -25,3 +25,15 @@ function RandomIntNumber(min, max) {
 }
 
 console.log(RandomIntNumber(5, 50));
+
+function productDescription(string, productName, productPrice) {
+  console.log(string, productName, productPrice);
+  return "This is a product.";
+}
+
+const productName = "JavaScript Course";
+const productPrice = 29.99;
+
+const prodDesc = productDescription`This is a productName ${productName} and this is a product price ${productPrice}.`;
+
+console.log(prodDesc);
