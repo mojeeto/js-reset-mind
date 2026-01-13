@@ -27,6 +27,13 @@ function trackUserHandler() {
   getPosition()
     .then((posData) => {
       console.log(posData);
+      // every thing can be return in this function and the retuned function turn in to promise type and can be use in other then method
+      // for example we can `return 'Some String'` and it's cast to promise and we can use the then method again and use this string as data argument
+      return "Some String";
+    })
+    .then((data) => {
+      // data is Some String
+      console.log(data);
     })
     .catch((err) => {
       data = err;
