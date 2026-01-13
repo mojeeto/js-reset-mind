@@ -21,7 +21,17 @@ const setTimer = (duration) =>
     }
   });
 
-function trackUserHandler() {
+// if function be a async function the function will return the return thing on the function wrapped promise that means this function with async keyword will return Promise<void>
+async function trackUserHandler() {
+  try {
+    const postData = await getPosition();
+    const timeData = await setTimer(2000);
+    console.log(postData, timeData);
+  } catch (err) {
+    const timeData = setTimer(2000);
+    console.log(err, timeData);
+  }
+  /*
   // in iran i dont have internet yet
   let data;
   getPosition()
@@ -46,7 +56,8 @@ function trackUserHandler() {
       // overall we can have multiple catch method and then and each then method can throw an error than handled by another catch method below that
     });
   // this line execute first because the js not block the code for getting permission from user
-  console.log("Getting user position...");
+  // console.log("Getting user position...");
+  */
 }
 
 button.addEventListener("click", trackUserHandler);
