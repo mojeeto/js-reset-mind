@@ -62,6 +62,17 @@ async function trackUserHandler() {
 
 button.addEventListener("click", trackUserHandler);
 
+// this static method runs the all promise functions then return the fastest function value
+// it's can be the second or first or third or ... because we can pass the miltiple function to this array
+// the result of the other functions be ignored the winner function will valuable
+Promise.race([getPosition(), setTimer(2000)])
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 /*
 let result = 0;
 
