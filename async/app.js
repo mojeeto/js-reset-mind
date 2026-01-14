@@ -13,8 +13,8 @@ const getPosition = (opt) =>
 const setTimer = (duration) =>
   new Promise((resolve, reject) => {
     try {
-      setTimeout(() => {
-        resolve("DONE!");
+      const id = setTimeout(() => {
+        resolve("DONE!, ID: " + id);
       }, duration);
     } catch (err) {
       reject(err);
@@ -65,6 +65,7 @@ button.addEventListener("click", trackUserHandler);
 // this static method runs the all promise functions then return the fastest function value
 // it's can be the second or first or third or ... because we can pass the miltiple function to this array
 // the result of the other functions be ignored the winner function will valuable
+/*
 Promise.race([getPosition(), setTimer(2000)])
   .then((data) => {
     console.log(data);
@@ -72,6 +73,23 @@ Promise.race([getPosition(), setTimer(2000)])
   .catch((err) => {
     console.log(err);
   });
+*/
+
+// with all static method all functions will execute then return the each data type returned as array to the then method
+// if each one get an error the catch method triggered and other methods if they succid will be ignored and other hand don't execute
+/*
+Promise.all([setTimer(1000), setTimer(2000), setTimer(1500)]).then(
+  (promisesData) => {
+    console.log(promisesData);
+  },
+);
+*/
+// with this method the all functions will be execute and if they have error or success in they process they will be returned as object with contain all information, and the catch method will be useless
+Promise.allSettled([setTimer(1000), setTimer(2000), setTimer(1500)]).then(
+  (promisesData) => {
+    console.log(promisesData);
+  },
+);
 
 /*
 let result = 0;
