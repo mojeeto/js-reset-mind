@@ -2,7 +2,7 @@
  * Time Complexity => Big O
  * Linear Time     => O(n)
  * Constant Time   => O(1)
- * Quadrate Time   => O(n^2)
+ * Quadratic Time   => O(n^2)
  * Cubie Time      => O(n^3)
  */
 
