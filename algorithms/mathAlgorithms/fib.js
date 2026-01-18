@@ -16,7 +16,7 @@ function fib(index) {
   // T = 5 + 3n - 2 = 3 + 3n = (3n) fastest growing term and remove the coefficent ==> final result the T is (n)
   // so it's linear time Complexity
     */
-  // recursion way
+  // recursion way O(2^n) very bad
   /*
   if ([0, 1].includes(index)) return 1;
   return fib(index - 1) + fib(index - 2);
