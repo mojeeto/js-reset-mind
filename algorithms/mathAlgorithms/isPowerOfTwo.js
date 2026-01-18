@@ -1,5 +1,8 @@
 function isPowerOfTwo(number) {
+  if (number < 1) return false; // avoid float numbers
+  return (number & (number - 1)) === 0;
   // return Number.isInteger(Math.log2(number));
+  /*
   if (number < 1) return false;
   let dividedNumber = number;
   while (dividedNumber !== 1) {
@@ -8,6 +11,7 @@ function isPowerOfTwo(number) {
     dividedNumber /= 2;
   }
   return true;
+  */
 }
 
 // time complexity => O(log2 n)
