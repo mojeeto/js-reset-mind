@@ -11,6 +11,9 @@ function fib(number, memory = {}) {
   return result;
 }
 
+// Linear Time Complexity O(2n) => O(n) OPTIMIZE!!
+// fib recursion function without dynamic programming is exponential time complexity => O(2^n) BAD!!
+
 console.log("Index 30 of fib:", fib(30, memo));
 console.log("For fib(30) function counter is", counter);
 counter = 0; // reset the counter
