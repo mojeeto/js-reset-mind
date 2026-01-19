@@ -16,6 +16,10 @@ function sort(unSortedArray) {
   return smallestElementsArray.concat(centerElements, biggestElementsArray);
 }
 
+// Best Case: O(n*log(n))
+// Avg Case: O(n*log(n))
+// Worst Case: O(n^2)
+
 const unSortedArray = [-3, 10, 1, 100, -3, -10, 22, 15];
 const sortedArray = sort(unSortedArray);
 console.log("Un-Sorted Array", unSortedArray);
