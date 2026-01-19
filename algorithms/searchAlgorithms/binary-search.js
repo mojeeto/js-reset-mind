@@ -11,6 +11,10 @@ function findElement(sortedArray, element) {
   return -1;
 }
 
+// Base Case: O(1)
+// Avg Case: O(log n)
+// Worst Case: O(log n)
+
 const arr = [1, 5, 9, 13, 99, 100];
 
 console.log(findElement(arr, 9));
