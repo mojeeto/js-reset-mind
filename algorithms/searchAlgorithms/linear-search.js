@@ -21,6 +21,10 @@ function findElement(arr, element, callBack) {
   return result;
 }
 
+// best case: O(1)
+// avg case: Tends to be O(n)
+// worst case: O(n)
+
 const arr = [5, 3, 10, -10, 33, 51];
 
 console.log(findElement(arr, 10));
