@@ -10,6 +10,10 @@ function sort(unSortedArray) {
   return sortedArray;
 }
 
+// Time Complexity
+// Best Case: O(n)
+// Worst Case: O(n^2)
+
 const unSortedList = [5, 10, -3, -10, 1, 100, 99];
 const sortedList = sort(unSortedList);
 console.log(unSortedList);
