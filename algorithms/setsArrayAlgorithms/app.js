@@ -11,6 +11,10 @@ function cartProduct(setA, setB) {
   return sets;
 }
 
+// Time Complexity: O(n*m)
+// create new array per each array
+// Space Complexity: O(n*m)
+
 const colors = ["blue", "red"];
 const sizes = ["m", "l"];
 console.log(cartProduct(colors, sizes)); // [[blue, m], [blue, l], ...]
