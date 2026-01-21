@@ -30,6 +30,8 @@ function getPermutation(options) {
   return permutations;
 }
 
+// time complexity: O(n!) Very Bad
+
 const todoListItems = [
   "Walk the dog",
   "Clean the toilet",
