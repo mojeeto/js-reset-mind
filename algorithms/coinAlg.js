@@ -31,6 +31,8 @@ function computeChange(coins, amount) {
   return result;
 }
 
+// time complexity for greedy solution is O(n)
+
 const availableCoins = [100, 50, 20, 10, 5, 2, 1];
 const targetAmount = 129;
 
