@@ -1,5 +1,5 @@
 function knapsack(items, maxCapacity, itemIndex) {
-  if (maxCapacity === 0 || itemIndex < 0)
+  if (maxCapacity <= 0 || itemIndex < 0)
     return {
       items: [],
       value: 0,
@@ -9,23 +9,25 @@ function knapsack(items, maxCapacity, itemIndex) {
   if (items[itemIndex].weight > maxCapacity)
     return knapsack(items, maxCapacity, itemIndex - 1);
 
+  // yes option
   const sackWithItem = knapsack(
     items,
     maxCapacity - items[itemIndex].weight,
     itemIndex - 1,
   );
+  // no option
   const sackWithoutItem = knapsack(items, maxCapacity, itemIndex - 1);
 
-  const valueSackWithItem = sackWithItem.value + items[itemIndex].value;
-  const valueSackWithoutItem = sackWithoutItem.value;
+  const valueYesItems = sackWithItem.value + items[itemIndex].value;
+  const valueNoItems = sackWithoutItem.value;
 
-  if (valueSackWithItem > valueSackWithoutItem)
-    return {
-      items: sackWithItem.items.concat(items[itemIndex]),
-      value: valueSackWithItem,
-      weight: sackWithItem.weight + items[itemIndex].weight,
-    };
-  else sackWithoutItem;
+  if (valueYesItems < valueNoItems) return sackWithoutItem;
+
+  return {
+    items: sackWithItem.items.concat(items[itemIndex]),
+    value: valueYesItems,
+    weight: sackWithItem.weight + items[itemIndex].weight,
+  };
 }
 
 const items = [
