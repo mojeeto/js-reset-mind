@@ -1,4 +1,19 @@
 function knapsack(items, maxCapacity, itemIndex) {
+  const itemResult = [];
+  let weight = maxCapacity;
+  let value = 0;
+
+  for (const item of items) {
+    if (item.weight <= weight) {
+      value += item.value;
+      weight -= item.weight;
+      itemResult.push(item.name);
+    }
+  }
+
+  return itemResult;
+
+  /*
   if (maxCapacity <= 0 || itemIndex < 0)
     return {
       items: [],
@@ -28,6 +43,7 @@ function knapsack(items, maxCapacity, itemIndex) {
     value: valueYesItems,
     weight: sackWithItem.weight + items[itemIndex].weight,
   };
+  */
 }
 
 const items = [
@@ -47,6 +63,6 @@ const items = [
     weight: 3,
   },
 ];
-const maxCapacity = 8;
+const maxCapacity = 14;
 
 console.log(knapsack(items, maxCapacity, items.length - 1));
