@@ -31,6 +31,7 @@ async function getPosts() {
     const postItemNode = document.importNode(postItemTemplate.content, true);
     postItemNode.querySelector("h2").textContent = item.title.toUpperCase();
     postItemNode.querySelector("p").textContent = item.body;
+    postItemNode.querySelector("li").id = item.id;
     postList.appendChild(postItemNode);
   }
 }
@@ -51,4 +52,11 @@ form.addEventListener("submit", (e) => {
   const title = e.currentTarget.querySelector("#title").value;
   const body = e.currentTarget.querySelector("#content").value;
   postData(title, body);
+});
+
+postList.addEventListener("click", ({ target }) => {
+  if (target.tagName === "BUTTON") {
+    const postId = target.closest("li").id;
+    sendHttpRequest("DELETE", "/posts/" + postId);
+  }
 });
