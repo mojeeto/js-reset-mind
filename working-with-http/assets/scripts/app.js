@@ -17,7 +17,16 @@ function sendHttpRequest(method, path, data = {}) {
   return new Promise((resolve, reject) => {
     // add listener for when xhr response
     xhrInstance.onload = () => {
-      resolve(xhrInstance.response);
+      const { status, response } = xhrInstance;
+      if (status >= 200 && status < 300) resolve(response);
+      else reject(new Error("Something went wrong!"));
+    };
+    // network error handling
+    // for response error or bad status code handling
+    // we have to handle it in onload
+    // xhrInstance.onerror = () => {}
+    xhrInstance.onerror = () => {
+      throw new Error("Please check your internet.");
     };
     // send the request
     // send data as JSON to api
@@ -26,13 +35,17 @@ function sendHttpRequest(method, path, data = {}) {
 }
 
 async function getPosts() {
-  const items = await sendHttpRequest("GET", "/posts");
-  for (const item of items) {
-    const postItemNode = document.importNode(postItemTemplate.content, true);
-    postItemNode.querySelector("h2").textContent = item.title.toUpperCase();
-    postItemNode.querySelector("p").textContent = item.body;
-    postItemNode.querySelector("li").id = item.id;
-    postList.appendChild(postItemNode);
+  try {
+    const items = await sendHttpRequest("GET", "/posts");
+    for (const item of items) {
+      const postItemNode = document.importNode(postItemTemplate.content, true);
+      postItemNode.querySelector("h2").textContent = item.title.toUpperCase();
+      postItemNode.querySelector("p").textContent = item.body;
+      postItemNode.querySelector("li").id = item.id;
+      postList.appendChild(postItemNode);
+    }
+  } catch (error) {
+    console.log(error.message);
   }
 }
 
