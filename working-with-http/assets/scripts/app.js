@@ -1,6 +1,7 @@
 const url = "https://jsonplaceholder.typicode.com/";
 const postItemTemplate = document.getElementById("post-item-template");
 const postList = document.querySelector(".posts");
+const form = document.querySelector("#new-post form");
 const fetchPostButton =
   document.getElementById("available-posts").firstElementChild;
 
@@ -45,5 +46,9 @@ async function postData(title, body) {
 }
 
 fetchPostButton.addEventListener("click", getPosts);
-
-postData("Example title", "Example Body");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const title = e.currentTarget.querySelector("#title").value;
+  const body = e.currentTarget.querySelector("#content").value;
+  postData(title, body);
+});
