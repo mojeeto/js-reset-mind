@@ -4,7 +4,7 @@ const postList = document.querySelector(".posts");
 const fetchPostButton =
   document.getElementById("available-posts").firstElementChild;
 
-function sendHttpRequest(method, path) {
+function sendHttpRequest(method, path, data = {}) {
   const url = "https://jsonplaceholder.typicode.com" + path;
   // create XMLHttpRequest Instance
   const xhrInstance = new XMLHttpRequest();
@@ -19,7 +19,8 @@ function sendHttpRequest(method, path) {
       resolve(xhrInstance.response);
     };
     // send the request
-    xhrInstance.send();
+    // send data as JSON to api
+    xhrInstance.send(JSON.stringify(data));
   });
 }
 
@@ -33,4 +34,16 @@ async function getPosts() {
   }
 }
 
+async function postData(title, body) {
+  const userId = 1;
+  const newPostData = {
+    title,
+    body,
+    userId,
+  };
+  sendHttpRequest("POST", "/posts", newPostData);
+}
+
 fetchPostButton.addEventListener("click", getPosts);
+
+postData("Example title", "Example Body");
