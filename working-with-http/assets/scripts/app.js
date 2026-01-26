@@ -5,7 +5,7 @@ const form = document.querySelector("#new-post form");
 const fetchPostButton =
   document.getElementById("available-posts").firstElementChild;
 
-function sendHttpRequest(method, path, data) {
+async function sendHttpRequest(method, path, data) {
   const url = "https://jsonplaceholder.typicode.com" + path;
   /*
   // create XMLHttpRequest Instance
@@ -35,6 +35,7 @@ function sendHttpRequest(method, path, data) {
     xhrInstance.send(JSON.stringify(data));
     */
   // fetch new way
+  /*
   return fetch(url, {
     method,
     body: JSON.stringify(data),
@@ -42,16 +43,35 @@ function sendHttpRequest(method, path, data) {
       "Content-Type": "application/json",
     },
   }).then((response) => response.json());
+  */
+  const response = await fetch(url, {
+    method,
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const { status } = response;
+  const responseData = await response.json();
+  if (status < 200 || status > 300) {
+    console.log(responseData);
+    throw new Error("Something went wronge!");
+  }
+  return responseData;
 }
 
 async function getPosts() {
-  const items = await sendHttpRequest("GET", "/posts");
-  for (const item of items) {
-    const postItemNode = document.importNode(postItemTemplate.content, true);
-    postItemNode.querySelector("h2").textContent = item.title.toUpperCase();
-    postItemNode.querySelector("p").textContent = item.body;
-    postItemNode.querySelector("li").id = item.id;
-    postList.appendChild(postItemNode);
+  try {
+    const items = await sendHttpRequest("GET", "/post");
+    for (const item of items) {
+      const postItemNode = document.importNode(postItemTemplate.content, true);
+      postItemNode.querySelector("h2").textContent = item.title.toUpperCase();
+      postItemNode.querySelector("p").textContent = item.body;
+      postItemNode.querySelector("li").id = item.id;
+      postList.appendChild(postItemNode);
+    }
+  } catch (error) {
+    console.log(error.message);
   }
 }
 
