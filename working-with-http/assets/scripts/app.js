@@ -5,8 +5,9 @@ const form = document.querySelector("#new-post form");
 const fetchPostButton =
   document.getElementById("available-posts").firstElementChild;
 
-function sendHttpRequest(method, path, data = {}) {
+function sendHttpRequest(method, path, data) {
   const url = "https://jsonplaceholder.typicode.com" + path;
+  /*
   // create XMLHttpRequest Instance
   const xhrInstance = new XMLHttpRequest();
   // configure the instance of xhr
@@ -31,21 +32,22 @@ function sendHttpRequest(method, path, data = {}) {
     // send the request
     // send data as JSON to api
     xhrInstance.send(JSON.stringify(data));
-  });
+    */
+  // fetch new way
+  return fetch(url, {
+    method,
+    body: JSON.stringify(data),
+  }).then((response) => response.json());
 }
 
 async function getPosts() {
-  try {
-    const items = await sendHttpRequest("GET", "/posts");
-    for (const item of items) {
-      const postItemNode = document.importNode(postItemTemplate.content, true);
-      postItemNode.querySelector("h2").textContent = item.title.toUpperCase();
-      postItemNode.querySelector("p").textContent = item.body;
-      postItemNode.querySelector("li").id = item.id;
-      postList.appendChild(postItemNode);
-    }
-  } catch (error) {
-    console.log(error.message);
+  const items = await sendHttpRequest("GET", "/posts");
+  for (const item of items) {
+    const postItemNode = document.importNode(postItemTemplate.content, true);
+    postItemNode.querySelector("h2").textContent = item.title.toUpperCase();
+    postItemNode.querySelector("p").textContent = item.body;
+    postItemNode.querySelector("li").id = item.id;
+    postList.appendChild(postItemNode);
   }
 }
 
