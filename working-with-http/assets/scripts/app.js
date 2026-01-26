@@ -10,6 +10,7 @@ function sendHttpRequest(method, path, data) {
   /*
   // create XMLHttpRequest Instance
   const xhrInstance = new XMLHttpRequest();
+  xhr.setRequestHeader('Content-Type', 'application/json')
   // configure the instance of xhr
   xhrInstance.open(method, url);
   // this line make the response JSON.parse(xhrInstance.response) as default
@@ -37,6 +38,9 @@ function sendHttpRequest(method, path, data) {
   return fetch(url, {
     method,
     body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
   }).then((response) => response.json());
 }
 
