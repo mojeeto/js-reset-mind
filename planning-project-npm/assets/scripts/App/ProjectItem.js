@@ -1,5 +1,3 @@
-import Tooltip from "./Tooltip.js";
-
 export default class ProjectItem {
   hasActiveTooltip = false;
 
@@ -15,8 +13,11 @@ export default class ProjectItem {
   showMoreInfoHandler() {
     // App.analytics();
     if (this.hasActiveTooltip) return;
-    const tooltip = new Tooltip(this);
-    tooltip.attach();
+    // avoid to download more file in module mode
+    import("./Tooltip.js").then((module) => {
+      const tooltip = new module.default(this);
+      tooltip.attach();
+    });
   }
 
   connectDrag() {
