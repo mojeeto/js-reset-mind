@@ -1,6 +1,7 @@
 import ProjectList from "./App/ProjectList.js";
 
 console.log("this:", this);
+console.log("this:", globalThis);
 
 class App {
   static analyticState = "Not-Active";
