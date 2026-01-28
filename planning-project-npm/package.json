@@ -1,0 +1,15 @@
+{
+  "name": "planning-project-npm",
+  "version": "1.0.0",
+  "description": "Some description",
+  "license": "ISC",
+  "author": "Mojtaba Nouri",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.2"
+  }
+}
