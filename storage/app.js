@@ -14,14 +14,19 @@ const userData = {
 
 // JSON data is string data
 storeBtn.addEventListener('click', () => {
-  sessionStorage.setItem("uid", userId);
-  localStorage.setItem('userData', JSON.stringify(userData));
+  // sessionStorage.setItem("uid", userId);
+  // localStorage.setItem('userData', JSON.stringify(userData));
+  // set Cookie
+  document.cookie = 'userid=' + userId;
 })
 
 retrBtn.addEventListener('click', () => {
-  const uid = sessionStorage.getItem("uid");
-  const user = localStorage.getItem("userData");
-  console.log(JSON.parse(user))
-  if (uid) console.log('the user id is ' + uid);
-  else console.log("uid not found!");
+  // const uid = sessionStorage.getItem("uid");
+  // const user = localStorage.getItem("userData");
+  // console.log(JSON.parse(user))
+  // if (uid) console.log('the user id is ' + uid);
+  // else console.log("uid not found!");
+  // get cookie
+  // we can read thins because it's not httpOnly and more
+  console.log(document.cookie);
 })
