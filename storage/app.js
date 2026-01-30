@@ -18,6 +18,9 @@ storeBtn.addEventListener('click', () => {
   // localStorage.setItem('userData', JSON.stringify(userData));
   // set Cookie
   document.cookie = 'userid=' + userId + '; max-age=2'; // 2 seconds
+  // document.cookie = 'userid=' + userId + '; expires=somedata'; // 2 seconds
+  // also we can add more cookie like this
+  // document.cookie = 'somekey=somevalue';
 })
 
 retrBtn.addEventListener('click', () => {
