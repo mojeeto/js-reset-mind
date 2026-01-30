@@ -17,7 +17,7 @@ storeBtn.addEventListener('click', () => {
   // sessionStorage.setItem("uid", userId);
   // localStorage.setItem('userData', JSON.stringify(userData));
   // set Cookie
-  document.cookie = 'userid=' + userId;
+  document.cookie = 'userid=' + userId + '; max-age=2'; // 2 seconds
 })
 
 retrBtn.addEventListener('click', () => {
@@ -29,4 +29,6 @@ retrBtn.addEventListener('click', () => {
   // get cookie
   // we can read thins because it's not httpOnly and more
   console.log(document.cookie);
+  // the advantage of cookie is that we can set expire time and 
+  // sent in to server side with http request
 })
