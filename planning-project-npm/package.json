@@ -4,14 +4,15 @@
   "description": "Some description",
   "license": "ISC",
   "author": "Mojtaba Nouri",
-  "type": "commonjs",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
     "eslint": "^9.39.2",
-    "globals": "^17.2.0"
+    "globals": "^17.2.0",
+    "webpack": "^5.105.0",
+    "webpack-cli": "^6.0.1"
   }
 }
