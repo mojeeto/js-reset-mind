@@ -12,6 +12,7 @@ class PlaceFinder {
         const modal = new Modal('loading-modal-content');
         modal.show();
         navigator.geolocation.getCurrentPosition(success => {
+            modal.hide();
             const coordinates = {
                 lat: success.coords.latitude,
                 lng: success.coords.longitude,
