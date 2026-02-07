@@ -31,6 +31,8 @@ class PlaceFinder {
 class App {
     static main() {
         new PlaceFinder();
+
+        console.log(encodeURI('خیابان حسینی - نبش قاسمی - پلاک ۱۰۸'))
     }
 }
 
